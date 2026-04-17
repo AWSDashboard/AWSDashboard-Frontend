@@ -8,46 +8,12 @@ Bienvenido al repositorio del Frontend de **AWSDashboard**. Este proyecto está 
 
 ##  Índice
 
-1. [Próximos Pasos (Roadmap)](#-próximos-pasos)
-2. [Requisitos Previos](#-requisitos-previos)
-3. [Instalación y Configuración (Aterrizar el proyecto)](#-instalación-y-configuración)
-4. [Estructura del Proyecto](#-estructura-del-proyecto)
+1. [Requisitos Previos](#-requisitos-previos)
+2. [Instalación y Configuración (Aterrizar el proyecto)](#-instalación-y-configuración)
+3. [Estructura del Proyecto](#-estructura-del-proyecto)
+4. [Scripts Disponibles](#-scripts-disponibles)
+5. [Próximos Pasos (Roadmap)](#-próximos-pasos)
 
-
-## Estructura del Proyecto
-
-
-```bash
-AWSDASHBOARD-FRONTEND/
-├── src/
-│   ├── app/
-│   │   ├── components/       # Componentes reutilizables (Botones, Inputs, Cards)
-│   │   ├── pages/            # Vistas principales de la aplicación
-│   │   │   ├── Home.tsx
-│   │   │   ├── LogIn.tsx
-│   │   │   ├── NotFound.tsx
-│   │   │   ├── Profile.tsx
-│   │   │   ├── Projects.tsx
-│   │   │   ├── Settings.tsx
-│   │   │   ├── SignUp.tsx
-│   │   │   └── ViewsEditor.tsx
-│   │   └── routes.tsx        # Configuración de enrutamiento (React Router)
-│   ├── styles/               # Archivos globales de estilos
-│   │   ├── fonts.css
-│   │   ├── tailwind.css      # Configuración base de Tailwind CSS
-│   │   └── theme.css
-│   ├── App.tsx               # Componente raíz
-│   ├── index.css             # Estilos de entrada
-│   └── main.jsx              # Punto de entrada de la aplicación (Render)
-├── .gitignore                # Archivos ignorados por git
-├── .prettierrc               # Configuración de formato de código
-├── eslint.config.js          # Configuración de linter
-├── index.html                # Plantilla HTML principal
-├── package.json              # Metadatos y scripts del proyecto
-├── pnpm-lock.yaml            # Árbol de dependencias bloqueado
-├── tsconfig.json             # Configuración de TypeScript
-└── vite.config.js            # Configuración del empaquetador Vite
-```
 ---
 
 ##  Requisitos Previos
