@@ -14,7 +14,7 @@ export function HomeScreen() {
         <Text style={{ fontSize: 24, margin: 20 }}>
           Contador Zustand: {count}
         </Text>
-        <Button title="Sumar" variant="submit" onPress={inc} />
+        <Button variant="submit" onPress={inc} > <Text>sumar</Text></Button>
       </Card>
     </Layout>
   )
