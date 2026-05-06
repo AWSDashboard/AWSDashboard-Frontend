@@ -1,6 +1,27 @@
 // app/styles/styles.ts
 import { StyleSheet, Platform, StatusBar } from 'react-native'
 
+export const AWS_COLORS = {
+  primary: '#ff9900', // El naranja clásico de AWS
+  secondary: '#232f3e', // El azul casi negro de la barra de navegación
+  text: '#16191f', // Gris oscuro para legibilidad
+  muted: '#68707e', // Gris para textos secundarios
+  link: '#0073bb', // Azul para enlaces
+}
+export const COLORS = {
+  primary: '#FF9900', // AWS Orange
+  secondary: '#232F3E', // AWS Deep Squid Ink (Azul casi negro)
+  accent: '#0073BB', // AWS Blue (Links e Info)
+  success: '#1D8102', // AWS Green
+  danger: '#D13212', // AWS Red
+  warning: '#EB5F07', // AWS Amber
+  white: '#FFFFFF',
+  black: '#000000',
+  gray900: '#16191F',
+  gray600: '#68707E', // Muted text
+  gray300: '#D5DBDB', // Borders
+}
+
 export const styles = {
   // 1. Estilos del Layout principal
   layout: StyleSheet.create({
@@ -21,6 +42,15 @@ export const styles = {
       alignSelf: 'center',
       width: '100%',
     },
+  }),
+  color: StyleSheet.create({
+    primary: { color: COLORS.primary },
+    secondary: { color: COLORS.secondary },
+    accent: { color: COLORS.accent },
+    success: { color: COLORS.success },
+    danger: { color: COLORS.danger },
+    muted: { color: COLORS.gray600 },
+    white: { color: COLORS.white },
   }),
 
   button: StyleSheet.create({
@@ -100,8 +130,8 @@ export const styles = {
       backgroundColor: '#ffffff',
       ...Platform.select({
         web: {
-          paddingTop: 50,
-          width: '6%', // Ojo: 5% es muy estrecho, asegúrate de que tus iconos quepan
+          paddingTop: 150,
+          width: '8%', // Ojo: 5% es muy estrecho, asegúrate de que tus iconos quepan
           minWidth: 65, // Añadido para que no desaparezca en pantallas pequeñas
           height: '100%',
           flexDirection: 'column',
@@ -111,7 +141,7 @@ export const styles = {
         native: {
           width: '100%',
           height: '10%',
-          minHeight: 100, // Evita que se aplaste en móviles pequeños
+          minHeight: 120, // Evita que se aplaste en móviles pequeños
           flexDirection: 'row',
           justifyContent: 'space-around',
           alignItems: 'center',
@@ -148,6 +178,72 @@ export const styles = {
       color: '#111',
       marginBottom: 20,
     },
-    // Aquí puedes meter tus cards genéricas en el futuro
+
+    homeIcon: {
+      backgroundColor: AWS_COLORS.primary,
+      width: 40,
+      height: 40,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 10,
+    },
+  }),
+
+  text: StyleSheet.create({
+    // --- Jerarquía de Títulos (H) ---
+    h1: {
+      fontSize: 32,
+      fontWeight: '700',
+      color: AWS_COLORS.secondary,
+      letterSpacing: -0.5,
+    },
+    h2: {
+      fontSize: 24,
+      fontWeight: '700',
+      color: AWS_COLORS.secondary,
+    },
+    h3: {
+      fontSize: 20,
+      fontWeight: '600',
+      color: AWS_COLORS.secondary,
+    },
+
+    h4: {
+      fontSize: 18,
+      fontWeight: '600',
+      color: AWS_COLORS.secondary,
+    },
+    h5: {
+      fontSize: 16,
+      fontWeight: '600',
+      color: AWS_COLORS.secondary,
+    },
+    h5MenuItem: {
+      fontSize: 16,
+      fontWeight: '600',
+      color: AWS_COLORS.primary,
+    },
+
+    // --- Variantes de Estado ---
+    muted: {
+      color: AWS_COLORS.muted,
+      fontSize: 14,
+    },
+
+    // --- Pesos de Fuente ---
+    fontMd: {
+      fontWeight: '500',
+    },
+    fontBold: {
+      fontWeight: '700',
+    },
+
+    // --- Tamaños ---
+    fontXs: {
+      fontSize: 12,
+    },
+    fontXl: {
+      fontSize: 28,
+    },
   }),
 }

@@ -75,7 +75,12 @@ module.exports = {
     'react-native-reanimated',
     'moti',
     'react-native-gesture-handler',
+    'app',
   ],
+
+  images: {
+    disableStaticImages: false,
+  },
 
   compiler: {
     define: {

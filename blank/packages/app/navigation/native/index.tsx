@@ -1,13 +1,13 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import { HomeScreen } from 'app/features/home/screen'
-import { UserDetailScreen } from 'app/features/user/detail-screen'
+import { ec2Screen } from 'app/features/ec2/screen'
+import { s3Screen } from 'app/features/s3/screen'
 
 const Stack = createNativeStackNavigator<{
   home: undefined
-  'user-detail': {
-    id: string
-  }
+  ec2: undefined
+  s3: undefined
 }>()
 
 export function NativeNavigation() {
@@ -21,10 +21,17 @@ export function NativeNavigation() {
         }}
       />
       <Stack.Screen
-        name="user-detail"
-        component={UserDetailScreen}
+        name="ec2"
+        component={ec2Screen}
         options={{
-          title: 'User',
+          title: 'EC2',
+        }}
+      />
+      <Stack.Screen
+        name="s3"
+        component={s3Screen}
+        options={{
+          title: 's3',
         }}
       />
     </Stack.Navigator>

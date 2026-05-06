@@ -16,11 +16,12 @@ export function NavigationProvider({
             initialRouteName: 'home',
             screens: {
               home: '',
-              'user-detail': 'users/:id',
+              ec2: 'ec2',
+              s3: 's3',
             },
           },
         }),
-        []
+        [],
       )}
     >
       {children}
