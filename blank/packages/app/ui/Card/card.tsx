@@ -7,7 +7,7 @@ import { useRouter } from 'solito/navigation'
 interface CardProps {
   children: React.ReactNode
   style?: StyleProp<ViewStyle>
-  link?: string // Permite añadir estilos extra desde fuera
+  link?: string 
 }
 
 export function Card({ children, style, link }: CardProps) {

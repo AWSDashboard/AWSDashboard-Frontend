@@ -9,18 +9,41 @@ export const AWS_COLORS = {
   link: '#0073bb', // Azul para enlaces
 }
 export const COLORS = {
+  // --- MARCA ---
   primary: '#FF9900', // AWS Orange
-  secondary: '#232F3E', // AWS Deep Squid Ink (Azul casi negro)
-  accent: '#0073BB', // AWS Blue (Links e Info)
+  primary300: '#FFD18A',
+  primary600: '#E08600',
+  primary900: '#8C5400',
+
+  secondary: '#232F3E', // AWS Deep Squid Ink
+  accent: '#0073BB', // AWS Blue
+
+  // --- ESTADOS ---
   success: '#1D8102', // AWS Green
+  success300: '#B7F59E', // Fondo de badge "running"
+  success600: '#166B02',
+  success900: '#0D3D01',
+
   danger: '#D13212', // AWS Red
+  danger300: '#F9D3CC', // Fondo de badge "terminated"
+  danger600: '#B12B0F',
+  danger900: '#6E1B0A',
+
+  // El color "medio rojo" que pediste (Naranja-Rojizo / Warn-Critical)
+  tomato: '#F24F29',
+  tomato300: '#FAD2C9',
+
   warning: '#EB5F07', // AWS Amber
+  warning300: '#FFDDBB',
+
+  // --- ESCALA DE GRISES ---
   white: '#FFFFFF',
   black: '#000000',
   gray900: '#16191F',
   gray600: '#68707E', // Muted text
   gray300: '#D5DBDB', // Borders
-}
+  gray100: '#F2F3F3', // Fondo de la app (AWS Grey)
+} as const
 
 export const styles = {
   // 1. Estilos del Layout principal

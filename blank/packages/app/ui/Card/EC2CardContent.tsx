@@ -2,11 +2,24 @@ import { ReactNativeElement, Text, View } from 'react-native'
 import { Icon } from '../Icon'
 import { COLORS, styles } from 'app/styles/styles'
 import ec2Logo from 'app/assets/cpu.png'
+import { EC2Controller } from 'app/hooks/useEc2Controller'
 
 interface CardContentProps {
   children?: ReactNativeElement
 }
 export function EC2CardContent({ children }: CardContentProps) {
+  const {
+    countInitiateEc2,
+    countStoppedEc2,
+    countInstances,
+    data,
+    isLoading,
+    error,
+  } = EC2Controller()
+
+  if (isLoading) return <Text>Cargando instancias de AWS...</Text>
+  if (error) return <Text>Error de conexión {`Error: ${error.message}`}</Text>
+
   return (
     <>
       <View
@@ -43,7 +56,9 @@ export function EC2CardContent({ children }: CardContentProps) {
           <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>
             instancias
           </Text>
-          <Text style={[styles.text.fontMd, { marginRight: 15 }]}>54</Text>
+          <Text style={[styles.text.fontMd, { marginRight: 15 }]}>
+            {countInstances}
+          </Text>
         </View>
         <View
           style={[
@@ -58,7 +73,9 @@ export function EC2CardContent({ children }: CardContentProps) {
           <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>
             Encendidas
           </Text>
-          <Text style={[styles.text.fontMd, { marginRight: 15 }]}>54</Text>
+          <Text style={[styles.text.fontMd, { marginRight: 15 }]}>
+            {countInitiateEc2}
+          </Text>
         </View>
         <View
           style={[
@@ -71,7 +88,9 @@ export function EC2CardContent({ children }: CardContentProps) {
           ]}
         >
           <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>apagadas</Text>
-          <Text style={[styles.text.fontMd, { marginRight: 15 }]}>54</Text>
+          <Text style={[styles.text.fontMd, { marginRight: 15 }]}>
+            {countStoppedEc2}
+          </Text>
         </View>
         <View
           style={[
@@ -84,7 +103,7 @@ export function EC2CardContent({ children }: CardContentProps) {
           ]}
         >
           <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>consumo</Text>
-          <Text style={[styles.text.fontMd, { marginRight: 15 }]}>54</Text>
+          <Text style={[styles.text.fontMd, { marginRight: 15 }]}>????</Text>
         </View>
       </View>
     </>

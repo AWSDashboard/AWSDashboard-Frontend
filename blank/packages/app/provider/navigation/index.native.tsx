@@ -18,6 +18,7 @@ export function NavigationProvider({
               home: '',
               ec2: 'ec2',
               s3: 's3',
+              ec2Info: 'ec2Info/:instanceId',
             },
           },
         }),

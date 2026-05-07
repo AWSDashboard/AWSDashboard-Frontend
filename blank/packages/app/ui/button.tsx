@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, ViewStyle, StyleProp } from 'react-native'
 import { styles } from 'app/styles/styles'
 
 interface ButtonProps {
-  children: React.ReactNode
+  children?: React.ReactNode
   onPress: () => void
   variant?: 'submit' | 'ghost' | 'link' // Nuestras variantes
   style?: StyleProp<ViewStyle> // Para ajustes extra (como márgenes)
