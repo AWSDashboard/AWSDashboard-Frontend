@@ -1,95 +1,126 @@
-# Blank Solito Example Monorepo 🕴
+# 🚀 AWSDashboard Frontend
 
-```sh
-npx create-solito-app@latest my-solito-app
+Bienvenido al repositorio del Frontend de **AWSDashboard**. Este proyecto está construido actualmente con **React** (utilizando Vite) y **Node.js**, con una arquitectura pensada para escalar.
+
+> **Nota sobre la visión del proyecto:** Aunque actualmente el proyecto usa Vite, la estructura está diseñada para facilitar una futura migración a **Next.js** para web y **React Native** para móvil, compartiendo lógica y componentes.
+
+---
+
+## Índice
+
+1. [Estructura del Proyecto](#-estructura-del-proyecto)
+2. [Requisitos Previos](#-requisitos-previos)
+3. [Instalación y Configuración (Aterrizar el proyecto)](#-instalación-y-configuración)
+4. [Próximos Pasos (Roadmap)](#-próximos-pasos)
+5. [Dependencias](#-dependencias)
+
+## Estructura del Proyecto
+
+```bash
+AWSDASHBOARD-FRONTEND/
+.
+├── .github/
+├── .vscode/
+├── .yarn/
+├── apps/                 # Entornos de ejecución
+│   ├── expo/             # App móvil nativa (React Native)
+│   └── next/             # App web (Next.js)
+├── packages/             # Código compartido (Monorepo core)
+│   └── app/              # Corazón de la lógica (Cross-platform)
+│       ├── api/          # Configuración de Axios e instancias de API
+│       ├── assets/       # Imágenes, logos (ec2Logo) y fuentes
+│       ├── features/     # Módulos de lógica y pantallas por dominio
+│       │   ├── ec2/
+│       │   ├── ec2Info/
+│       │   ├── home/
+│       │   └── s3/
+│       ├── hooks/        # Hooks personalizados
+│       │   └── api/      # Hooks de TanStack Query (useEc2, etc.)
+│       ├── navigation/   # Configuración de rutas nativas
+│       │   └── native/   # Stack Navigators y Linking
+│       ├── provider/     # Proveedores de contexto globales
+│       │   ├── navigation/
+│       │   └── safe-area/
+│       ├── services/     # Clases de servicios (ec2Service)
+│       ├── store/        # Gestión de estado global
+│       ├── styles/       # Temas, constantes
+│       ├── types/        # Definiciones de TypeScript
+│       └── ui/           # Componentes de interfaz atómicos
+│           └── Card/     # Sistema de tarjetas
+├── .env                  # Variables de entorno (API_URL)
+├── .gitignore
+├── .prettierrc           # Configuración de formato de código
+├── package.json          # Configuración de Workspaces y scripts de Turbo
+├── tsconfig.json         # Configuración base de TypeScript
+├── turbo.json            # Orquestación de builds y caché
+└── yarn.lock
 ```
 
-👾 [View the website](https://example.solito.dev)
+Esta estructura de monorepo es gracias a Solito.dev un proyecto de Fernando Rojo, ha creado una libreria y estructura que comunica los dos mundos, Next para web y Expo para moviles.
+Trabaja con sus propias rutas.
+Solito.dev: (https://solito.dev/)
+GitHun de Fernando Rojo:
 
-## ⚡️ Instantly clone & deploy
+---
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fnandorojo%2Fsolito%2Ftree%2Fmaster%2Fexample-monorepos%2Fblank&env=ENABLE_ROOT_PATH_BUILD_CACHE&root-directory=apps/next&envDescription=Set%20this%20environment%20variable%20to%201%20for%20Turborepo%20to%20cache%20your%20node_modules.&envLink=https%3A%2F%2Ftwitter.com%2Fjaredpalmer%2Fstatus%2F1488954563533189124&project-name=solito-app&repo-name=solito-app&demo-title=Solito%20App%20%E2%9A%A1%EF%B8%8F&demo-description=React%20Native%20%2B%20Next.js%20starter%20with%20Solito.%20Made%20by%20Fernando%20Rojo.&demo-url=https%3A%2F%2Fsolito.dev%2Fstarter&demo-image=https%3A%2F%2Fsolito.dev%2Fimg%2Fog.png&build-command=cd+..%2F..%3Bnpx+turbo+run+build+--filter%3Dnext-app)
+## Requisitos Previos
 
-## 🔦 About
+Antes de clonar e iniciar el proyecto, asegúrate de tener instalado lo siguiente en tu entorno local:
 
-This monorepo is a blank(ish) starter for an Expo + Next.js app.
+- **Node.js** (Se recomienda la versión LTS actual, ej. v18 o v20)
 
-While it's pretty barebones, it does a lot of the annoying config for you. The folder structure is opinionated, based on my long experience building for this stack.
+- **Yarn**: Usamos Yarn como gestor de paquetes para gestionar el monorepo y sus workspaces de forma eficiente. Si no lo tienes instalado, puedes hacerlo con:
 
-## 📦 Included packages
+  ```bash
+  npm install -g yarn
+  ```
 
-- `solito` for cross-platform navigation
-- `moti` for animations
-- Expo SDK 53
-- Next.js 15
-- React Navigation 7
-- React 19 (read more below)
-- React Compiler
+---
 
-For more, see the [compatibility docs](https://solito.dev/compatibility).
+## Instalación y Configuración
 
-## 🗂 Folder layout
+Sigue estos pasos para "aterrizar" el proyecto y tenerlo corriendo en tu máquina local:
 
-- `apps` entry points for each app
+**1. Clonar el repositorio:**
 
-  - `expo`
-  - `next`
-
-- `packages` shared packages across apps
-  - `app` you'll be importing most files from `app/`
-    - `features` (don't use a `screens` folder. organize by feature.)
-    - `provider` (all the providers that wrap the app, and some no-ops for Web.)
-    - `navigation` Next.js has a `pages/` folder. React Native doesn't. This folder contains navigation-related code for RN. You may use it for any navigation code, such as custom links.
-
-You can add other folders inside of `packages/` if you know what you're doing and have a good reason to.
-
-## 🏁 Start the app
-
-- Install dependencies: `yarn`
-
-- Next.js local dev: `yarn web`
-  - Runs `yarn next`
-- Expo local dev:
-  - First, build a dev client onto your device or simulator
-    - `cd apps/expo`
-    - Then, either `expo run:ios`, or `eas build`
-  - After building the dev client, from the root of the monorepo...
-    - `yarn native` (This runs `expo start --dev-client`)
-
-## 🆕 Add new dependencies
-
-### Pure JS dependencies
-
-If you're installing a JavaScript-only dependency that will be used across platforms, install it in `packages/app`:
-
-```sh
-cd packages/app
-yarn add date-fns
-cd ../..
-yarn
+```bash
+git clone <URL_DE_TU_REPOSITORIO>
+cd AWSDASHBOARD-FRONTEND
 ```
 
-### Native dependencies
+**2. Aterrizar el proyecto**
 
-If you're installing a library with any native code, you must install it in `apps/expo`:
-
-```sh
-cd apps/expo
-yarn add react-native-reanimated
-
-cd ../..
-yarn
+```bash
+yarn install
 ```
 
-You can also install the native library inside of `packages/app` if you want to get autoimport for that package inside of the `app` folder. However, you need to be careful and install the _exact_ same version in both packages. If the versions mismatch at all, you'll potentially get terrible bugs. This is a classic monorepo issue. I use `lerna-update-wizard` to help with this (you don't need to use Lerna to use that lib).
+**3. Inicializar el proyecto**
 
-## 🎙 About the creator
+- **web**:
 
-Follow Fernando Rojo on Twitter: [@FernandoTheRojo](https://twitter.com/fernandotherojo)
+```bash
+yarn web  # Inicia el servidor de desarrollo de **Next.js**. |
+```
 
-## 🧐 Why use Expo + Next.js?
+- **nativo**:
 
-See my talk about this topic at Next.js Conf 2021:
+```bash
+yarn native  # Inicia el bundler de Metro para **Expo**.
+```
 
-<a href="https://www.youtube.com/watch?v=0lnbdRweJtA"><img width="1332" alt="image" src="https://user-images.githubusercontent.com/13172299/157299915-b633e083-f271-48c6-a262-7b7eef765be5.png">
-</a>
+## Dependencias
+
+### Gestión del Monorepo
+
+- **Workspaces (`apps/*`, `packages/*`)**: Define la arquitectura del proyecto. Permite que la lógica compartida en `packages/app` se inyecte automáticamente tanto en la web (**Next.js**) como en la versión nativa (**Expo**).
+- **Turborepo (`turbo`)**: Es el motor de ejecución. Se encarga de cachear tareas y ejecutar scripts en paralelo, haciendo que los builds y el desarrollo sean increíblemente rápidos.
+- **Yarn v4**: Implementa una gestión de dependencias moderna, más segura y rápida, garantizando consistencia en todo el workspace.
+
+### Diseño y Lenguaje
+
+- **TypeScript**: Tipado estricto en todo el proyecto para evitar errores en tiempo de ejecución, especialmente crítico al compartir tipos de AWS entre plataformas.
+
+### Navegación y DX (Developer Experience)
+
+- **Expo Linking**: La pieza clave para el **Deep Linking**. Permite que las rutas dinámicas (como los detalles de una instancia EC2) funcionen perfectamente tanto en el navegador como al abrir links dentro de la app móvil.
+- **Prettier & ESLint**: Configuración automatizada para mantener un código limpio. Incluye un plugin para el **auto-ordenado de imports**, manteniendo los archivos organizados sin esfuerzo manual.
