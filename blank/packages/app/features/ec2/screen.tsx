@@ -45,8 +45,7 @@ export function ec2Screen() {
             </View>
             <View
               style={{
-                marginLeft: 50,
-                padding: 10,
+                marginTop: 20,
                 flex: 1,
                 gap: 10,
                 flexDirection: 'column',
@@ -63,7 +62,7 @@ export function ec2Screen() {
                 ]}
               >
                 <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>
-                  Id de la instancia:
+                  Id:
                 </Text>
                 <Text style={[styles.text.fontMd, { marginRight: 15 }]}>
                   {element.instanceId}

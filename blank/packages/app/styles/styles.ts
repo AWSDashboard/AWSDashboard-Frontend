@@ -51,7 +51,7 @@ export const styles = {
     mainContainer: {
       flex: 1,
       backgroundColor: '#f0efef',
-      paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+      // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
       flexDirection: Platform.OS === 'web' ? 'row' : 'column',
     },
     content: {
@@ -59,7 +59,10 @@ export const styles = {
     },
     scrollContainer: {
       flexGrow: 1,
-      padding: 16,
+      paddingLeft: 16,
+      paddingRight: 16,
+      paddingTop: 0,
+      marginTop: 0,
       // Centramos el contenido en pantallas web gigantes
       maxWidth: Platform.OS === 'web' ? 800 : '100%',
       alignSelf: 'center',
@@ -144,6 +147,12 @@ export const styles = {
       }),
       borderWidth: Platform.OS === 'web' ? 1 : 0, // En web un borde suave ayuda
       borderColor: '#efefef',
+    },
+    muttedContent: {
+      justifyContent: 'space-between',
+      flexDirection: 'row',
+      backgroundColor: COLORS.gray300,
+      borderRadius: 5,
     },
   }),
 
@@ -269,4 +278,34 @@ export const styles = {
       fontSize: 28,
     },
   }),
+
+  Headers: {
+    ec2: {
+      // Layout
+      flexDirection: 'column',
+      padding: 16,
+      backgroundColor: COLORS.white,
+      borderRadius: 12,
+
+      // Profundidad y Capas
+      zIndex: 100,
+      ...Platform.select({
+        android: {
+          elevation: 8,
+        },
+        ios: {
+          shadowColor: COLORS.black,
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.15,
+          shadowRadius: 10,
+        },
+        web: {
+          left: '20.5%',
+          boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.1)',
+          position: 'fixed',
+          width: 'calc(60% - 20px)',
+        },
+      }),
+    },
+  },
 }
