@@ -20,6 +20,26 @@ export function useEc2() {
     })
   }
 
+  function useResetInstance(id: string) {
+    const queryClient = useQueryClient()
+
+    return useMutation({
+      mutationFn: () => {
+        return service.resetEc2ById(id)
+      },
+
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['ec2-instances'] })
+        setTimeout(() => {
+          queryClient.invalidateQueries({ queryKey: ['ec2-instances'] })
+        }, 60000)
+      },
+      onError: (error) => {
+        console.log('Error en el stop instances:', error.message)
+      },
+    })
+  }
+
   function useStopInstance(id: string) {
     const queryClient = useQueryClient()
 
@@ -30,6 +50,9 @@ export function useEc2() {
 
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['ec2-instances'] })
+        setTimeout(() => {
+          queryClient.invalidateQueries({ queryKey: ['ec2-instances'] })
+        }, 60000)
       },
       onError: (error) => {
         console.log('Error en el stop instances:', error.message)
@@ -47,6 +70,9 @@ export function useEc2() {
 
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['ec2-instances'] })
+        setTimeout(() => {
+          queryClient.invalidateQueries({ queryKey: ['ec2-instances'] })
+        }, 60000)
       },
       onError: (error) => {
         console.log('Error en el stop instances:', error.message)
@@ -76,5 +102,6 @@ export function useEc2() {
     useEC2Instances,
     useStopInstance,
     useEC2Instance,
+    useResetInstance,
   }
 }

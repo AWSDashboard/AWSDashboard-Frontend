@@ -87,7 +87,6 @@ export const styles = {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      transition: 'all 0.2s ease', // Solo funciona en Web, pero no rompe en Móvil
     },
     // Variante: SUBMIT (Primario, sólido)
     submit: {
@@ -307,5 +306,5 @@ export const styles = {
         },
       }),
     },
-  },
+  } as const,
 }

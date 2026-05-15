@@ -41,6 +41,18 @@ export class ec2Service {
     )
     return data.body
   }
+
+  async resetEc2ById(instanceId: string) {
+    const { data } = await api.post(
+      `ec2/instances/${instanceId}/reboot`,
+      {},
+      {
+        params: { regionId: 1 },
+      },
+    )
+    return data.body
+  }
+
   async terminateEc2ById(instanceId: string) {
     const { data } = await api.delete(`ec2/instances/${instanceId}`, {
       params: { regionId: 1 },

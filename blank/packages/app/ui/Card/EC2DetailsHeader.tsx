@@ -5,8 +5,10 @@ import { Button } from '../button'
 import { Icon } from '../Icon'
 import Trash2 from '../../assets/trash2.png'
 import play from '../../assets/play.png'
+import spin from '../../assets/rotate-ccw.png'
 import pause from '../../assets/pause.png'
 import { useEc2 } from 'app/hooks/api/use-ec2'
+
 
 interface EC2DetailsHeaderProps {
   element: EC2Instance
@@ -16,19 +18,31 @@ export function EC2DetailsHeader({
   element,
   instanceId,
 }: EC2DetailsHeaderProps) {
-  const { useStopInstance, useRunInstance, useTerminateInstance } = useEc2()
+  const {
+    useStopInstance,
+    useRunInstance,
+    useTerminateInstance,
+    useResetInstance,
+  } = useEc2()
   const { mutate: stopInstance } = useStopInstance(instanceId)
   const { mutate: runInstance } = useRunInstance(instanceId)
   const { mutate: terminateInstance } = useTerminateInstance(instanceId)
+  const { mutate: resetInstance } = useResetInstance(instanceId)
 
   const handleStop = () => {
     stopInstance()
   }
+
   const handleRun = () => {
     runInstance()
   }
+
   const handleTerminate = () => {
     terminateInstance()
+  }
+
+  const handlereset = () => {
+    resetInstance()
   }
 
   const statusColor = (element: EC2Instance) => {
@@ -43,10 +57,10 @@ export function EC2DetailsHeader({
       <View
         style={{
           flexDirection: 'row',
-          justifyContent: 'space-between', // Separa el nombre del status al máximo
+          justifyContent: 'space-between',
           alignItems: 'center',
           width: '100%',
-          marginBottom: 15, // Espacio con la fila de abajo
+          marginBottom: 15,
         }}
       >
         <Text style={[styles.text.h2]}>{element?.name}</Text>
@@ -72,10 +86,10 @@ export function EC2DetailsHeader({
       <View
         style={{
           flexDirection: 'row',
-          justifyContent: 'center', // Centra los botones horizontalmente
+          justifyContent: 'center', 
           alignItems: 'center',
           width: '100%',
-          gap: 10, // Espacio entre botones
+          gap: 10,
         }}
       >
         <Button
@@ -86,9 +100,22 @@ export function EC2DetailsHeader({
             width: 40,
             backgroundColor: COLORS.success300,
             borderRadius: 40,
-          }} // Tamaño razonable para click
+          }}
         >
           <Icon asset={play} style={{ height: 20, width: 20 }} />
+        </Button>
+
+        <Button
+          variant="ghost"
+          onPress={handlereset}
+          style={{
+            height: 40,
+            width: 40,
+            backgroundColor: COLORS.primary300,
+            borderRadius: 40,
+          }} // Tamaño razonable para click
+        >
+          <Icon asset={spin} style={{ height: 20, width: 20 }} />
         </Button>
 
         <Button

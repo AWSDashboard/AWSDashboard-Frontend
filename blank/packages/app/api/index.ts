@@ -6,7 +6,7 @@ const getBaseUrl = () => {
   if (Platform.OS === 'web') {
     return 'http://localhost:8080/api/v1'
   }
-  return 'http://192.168.1.39:8080/api/v1'
+  return 'http://192.168.1.42:8080/api/v1'
 }
 
 export const api = axios.create({
