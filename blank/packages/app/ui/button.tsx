@@ -5,7 +5,7 @@ import { styles } from 'app/styles/styles'
 interface ButtonProps {
   children?: React.ReactNode
   onPress: () => void
-  variant?: 'submit' | 'ghost' | 'link' // Nuestras variantes
+  variant?: 'submit' | 'ghost' | 'link' | 'primary' // Nuestras variantes
   style?: StyleProp<ViewStyle> // Para ajustes extra (como márgenes)
 }
 
@@ -21,6 +21,7 @@ export function Button({
     variant === 'submit' && styles.button.submit,
     variant === 'ghost' && styles.button.ghost,
     variant === 'link' && styles.button.link,
+    variant === 'primary' && styles.button.primary,
     style, // Estilo extra manual
   ]
 

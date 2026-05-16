@@ -59,4 +59,72 @@ export class ec2Service {
     })
     return data.body
   }
+
+  async getEc2CPUData(id: string) {
+    const { data } = await api.get(`/ec2/instances/${id}/metrics/cpu`, {
+      params: { regionId: 1 },
+    })
+    // console.log('respuesta de ec2', data.body)
+    return data
+  }
+
+  async getEc2ReadDiskData(id: string) {
+    const { data } = await api.get(
+      `/ec2/instances/${id}/metrics/disk-read-bytes`,
+      {
+        params: { regionId: 1 },
+      },
+    )
+    // console.log('respuesta de ec2', data.body)
+    return data
+  }
+
+  async getEc2WriteDiskData(id: string) {
+    const { data } = await api.get(
+      `/ec2/instances/${id}/metrics/disk-write-bytes`,
+      {
+        params: { regionId: 1 },
+      },
+    )
+    // console.log('respuesta de ec2', data.body)
+    return data
+  }
+
+  async getEc2NetworkInData(id: string) {
+    const { data } = await api.get(`/ec2/instances/${id}/metrics/network-in`, {
+      params: { regionId: 1 },
+    })
+    // console.log('respuesta de ec2', data.body)
+    return data
+  }
+
+  async getEc2NetworkOutData(id: string) {
+    const { data } = await api.get(`/ec2/instances/${id}/metrics/network-out`, {
+      params: { regionId: 1 },
+    })
+    // console.log('respuesta de ec2', data.body)
+    return data
+  }
+
+  async getEc2NetworkPacketsInData(id: string) {
+    const { data } = await api.get(
+      `/ec2/instances/${id}/metrics/network-packets-in`,
+      {
+        params: { regionId: 1 },
+      },
+    )
+    // console.log('respuesta de ec2', data.body)
+    return data
+  }
+
+  async getEc2NetworkPacketsOutData(id: string) {
+    const { data } = await api.get(
+      `/ec2/instances/${id}/metrics/network-packets-out`,
+      {
+        params: { regionId: 1 },
+      },
+    )
+    // console.log('respuesta de ec2', data.body)
+    return data
+  }
 }

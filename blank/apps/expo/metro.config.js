@@ -18,6 +18,7 @@ config.resolver.nodeModulesPaths = [
 ]
 config.resolver.disableHierarchicalLookup = true
 
+
 config.transformer.getTransformOptions = async () => ({
   transform: {
     experimentalImportSupport: false,

@@ -1,14 +1,19 @@
 import { COLORS, styles } from 'app/styles/styles'
 import { EC2Instance } from 'app/types/ec2Types'
-import { Text, View } from 'react-native'
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
 import { Button } from '../button'
 import { Icon } from '../Icon'
 import Trash2 from '../../assets/trash2.png'
 import play from '../../assets/play.png'
 import spin from '../../assets/rotate-ccw.png'
 import pause from '../../assets/pause.png'
-import { useEc2 } from 'app/hooks/api/use-ec2'
-
+import { usePendingStore } from 'app/store/useCounterStore'
+import {
+  useResetInstance,
+  useRunInstance,
+  useStopInstance,
+  useTerminateInstance,
+} from 'app/hooks/api/use-ec2'
 
 interface EC2DetailsHeaderProps {
   element: EC2Instance
@@ -18,16 +23,18 @@ export function EC2DetailsHeader({
   element,
   instanceId,
 }: EC2DetailsHeaderProps) {
-  const {
-    useStopInstance,
-    useRunInstance,
-    useTerminateInstance,
-    useResetInstance,
-  } = useEc2()
-  const { mutate: stopInstance } = useStopInstance(instanceId)
-  const { mutate: runInstance } = useRunInstance(instanceId)
-  const { mutate: terminateInstance } = useTerminateInstance(instanceId)
-  const { mutate: resetInstance } = useResetInstance(instanceId)
+  const { mutate: stopInstance, isPending: isStopping } =
+    useStopInstance(instanceId)
+  const { mutate: runInstance, isPending: isRunning } =
+    useRunInstance(instanceId)
+  const { mutate: terminateInstance, isPending: isTerminating } =
+    useTerminateInstance(instanceId)
+  const { mutate: resetInstance, isPending: isResetting } =
+    useResetInstance(instanceId)
+  const { pending } = usePendingStore((state) => state)
+
+  const isAnyActionPending =
+    isStopping || isRunning || isTerminating || isResetting
 
   const handleStop = () => {
     stopInstance()
@@ -69,16 +76,18 @@ export function EC2DetailsHeader({
           style={{
             backgroundColor: statusColor(element!),
             borderRadius: 5,
+            flexDirection: 'row',
           }}
         >
           <Text
             style={[
               styles.text.h4,
-              { marginHorizontal: 10, marginVertical: 5 },
+              { marginHorizontal: 15, marginVertical: 5 },
             ]}
           >
             {element!.state}
           </Text>
+          {pending && <ActivityIndicator size="small" color={COLORS.black} />}
         </View>
       </View>
 
@@ -86,7 +95,7 @@ export function EC2DetailsHeader({
       <View
         style={{
           flexDirection: 'row',
-          justifyContent: 'center', 
+          justifyContent: 'center',
           alignItems: 'center',
           width: '100%',
           gap: 10,

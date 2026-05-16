@@ -47,28 +47,7 @@ export const COLORS = {
 
 export const styles = {
   // 1. Estilos del Layout principal
-  layout: StyleSheet.create({
-    mainContainer: {
-      flex: 1,
-      backgroundColor: '#f0efef',
-      // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-      flexDirection: Platform.OS === 'web' ? 'row' : 'column',
-    },
-    content: {
-      flex: 1, // Toma el espacio restante
-    },
-    scrollContainer: {
-      flexGrow: 1,
-      paddingLeft: 16,
-      paddingRight: 16,
-      paddingTop: 0,
-      marginTop: 0,
-      // Centramos el contenido en pantallas web gigantes
-      maxWidth: Platform.OS === 'web' ? 800 : '100%',
-      alignSelf: 'center',
-      width: '100%',
-    },
-  }),
+
   color: StyleSheet.create({
     primary: { color: COLORS.primary },
     secondary: { color: COLORS.secondary },
@@ -97,6 +76,9 @@ export const styles = {
       backgroundColor: '#0000001a',
       borderWidth: 2,
       borderColor: 'transparent',
+    },
+    primary: {
+      backgroundColor: '#FF9900', // Naranja AWS
     },
     // Variante: LINK (Sin fondo ni bordes, solo texto)
     link: {

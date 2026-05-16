@@ -1,20 +1,11 @@
 import { useState } from 'react'
-import { useEc2 } from './api/use-ec2'
+import { useEC2Instance, useEC2Instances } from './api/use-ec2'
 
 export function EC2Controller() {
   //storage global
 
   //state
   const [id, setId] = useState<string>()
-
-  //service
-  const {
-    useEC2Instance,
-    useEC2Instances,
-    useStopInstance,
-    useRunInstance,
-    useterminateInstance,
-  } = useEc2()
 
   const { data, isLoading, error } = useEC2Instances()
 
@@ -57,13 +48,9 @@ export function EC2Controller() {
 
     return `${seconds}s`
   }
-
   return {
     useEC2Instances,
-    useRunInstance,
-    useterminateInstance,
     handleSetId,
-    useStopInstance,
     formatUptime,
     element,
     elemntLoading,
