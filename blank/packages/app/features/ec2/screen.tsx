@@ -6,9 +6,12 @@ import { Card } from 'app/ui/Card/card'
 import { Icon } from 'app/ui/Icon'
 import { Layout } from 'app/ui/layout'
 import { Text, View } from 'react-native'
+import plus from '../../assets/plus.png'
+import { useRouter } from 'solito/navigation'
 
 export function ec2Screen() {
   const { data } = EC2Controller()
+  const { push, replace, back } = useRouter()
 
   const statusColor = (element: EC2Instance) => {
     // console.log('state', element.state)
@@ -18,10 +21,23 @@ export function ec2Screen() {
   }
   return (
     <Layout>
-      <Text style={[styles.text.h2]}> Instancias: </Text>
-      {data?.map((element) => {
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignContent: 'center',
+        }}
+      >
+        <Text style={[styles.text.h1]}> Instancias </Text>
+        <Button variant="primary" onPress={() => push('/createEc2')}>
+          <Icon asset={plus} />
+          <Text> Nueva instancia</Text>
+        </Button>
+      </View>
+
+      {data?.map((element, index) => {
         return (
-          <Card link={`/ec2Info/${element.instanceId}`}>
+          <Card key={index} link={`/ec2Info/${element.instanceId}`}>
             <View
               style={{
                 flexDirection: 'row',
@@ -45,8 +61,7 @@ export function ec2Screen() {
             </View>
             <View
               style={{
-                marginLeft: 50,
-                padding: 10,
+                marginTop: 20,
                 flex: 1,
                 gap: 10,
                 flexDirection: 'column',
@@ -63,7 +78,7 @@ export function ec2Screen() {
                 ]}
               >
                 <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>
-                  Id de la instancia:
+                  Id:
                 </Text>
                 <Text style={[styles.text.fontMd, { marginRight: 15 }]}>
                   {element.instanceId}

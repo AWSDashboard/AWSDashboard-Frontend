@@ -45,27 +45,124 @@ export const COLORS = {
   gray100: '#F2F3F3', // Fondo de la app (AWS Grey)
 } as const
 
+export const selectStyles = StyleSheet.create({
+  container: {
+    position: 'relative',
+    width: '100%',
+    zIndex: 10,
+  },
+  selectBox: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 12,
+    borderRadius: 8,
+    backgroundColor: '#fff',
+    minHeight: 46,
+  },
+  selectText: {
+    fontSize: 15,
+    color: '#232F3E',
+  },
+  placeholderText: {
+    fontSize: 15,
+    color: '#888',
+  },
+  arrow: {
+    fontSize: 12,
+    color: '#666',
+  },
+
+  dropdown: {
+    position: 'absolute',
+    top: '100%',
+    left: 0,
+    right: 0,
+    marginTop: 4,
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.15,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 4,
+      },
+      web: {
+        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+      },
+    }),
+    overflow: 'hidden',
+    zIndex: 999,
+  },
+  option: {
+    padding: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f0f0',
+    backgroundColor: '#fff',
+  },
+
+  optionText: {
+    fontSize: 15,
+    color: '#232F3E',
+  },
+
+  input: {
+    width: '100%',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 12,
+    borderRadius: 8,
+    backgroundColor: '#fff',
+    fontSize: 15,
+    color: '#232F3E', // El gris oscuro de AWS
+    minHeight: 46, // 🟢 Misma altura que el selectBox para que se alineen perfecto
+    // Propiedad exclusiva para Web (Next.js) para evitar el borde azul feo nativo
+    ...Platform.select({
+      web: {
+        outlineStyle: 'none' as any,
+      },
+    }),
+  },
+
+  // 🟢 Estilo por si quieres pintar el borde naranja de AWS cuando el usuario está escribiendo
+  inputFocused: {
+    borderColor: '#FF9900',
+  },
+
+  // 🟢 Estilo para cuando el input esté bloqueado (disabled)
+  inputDisabled: {
+    backgroundColor: '#f5f5f5',
+    borderColor: '#e0e0e0',
+    color: '#a0a0a0',
+  },
+
+  errorText: {
+    color: '#d93939',
+    fontSize: 13,
+    marginTop: 4,
+  },
+
+  errorBox: {
+    borderColor: '#d93939', // 🔴 El mismo rojo de AWS que usamos en el TextInput
+  },
+
+  disabledBox: {
+    backgroundColor: '#f5f5f5', // Fondo gris claro sutil de AWS
+    borderColor: '#e0e0e0', // Borde más claro para que se vea "apagado"
+  },
+})
+
 export const styles = {
   // 1. Estilos del Layout principal
-  layout: StyleSheet.create({
-    mainContainer: {
-      flex: 1,
-      backgroundColor: '#f0efef',
-      paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-      flexDirection: Platform.OS === 'web' ? 'row' : 'column',
-    },
-    content: {
-      flex: 1, // Toma el espacio restante
-    },
-    scrollContainer: {
-      flexGrow: 1,
-      padding: 16,
-      // Centramos el contenido en pantallas web gigantes
-      maxWidth: Platform.OS === 'web' ? 800 : '100%',
-      alignSelf: 'center',
-      width: '100%',
-    },
-  }),
+
   color: StyleSheet.create({
     primary: { color: COLORS.primary },
     secondary: { color: COLORS.secondary },
@@ -84,7 +181,6 @@ export const styles = {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      transition: 'all 0.2s ease', // Solo funciona en Web, pero no rompe en Móvil
     },
     // Variante: SUBMIT (Primario, sólido)
     submit: {
@@ -95,6 +191,9 @@ export const styles = {
       backgroundColor: '#0000001a',
       borderWidth: 2,
       borderColor: 'transparent',
+    },
+    primary: {
+      backgroundColor: '#FF9900', // Naranja AWS
     },
     // Variante: LINK (Sin fondo ni bordes, solo texto)
     link: {
@@ -144,6 +243,12 @@ export const styles = {
       }),
       borderWidth: Platform.OS === 'web' ? 1 : 0, // En web un borde suave ayuda
       borderColor: '#efefef',
+    },
+    muttedContent: {
+      justifyContent: 'space-between',
+      flexDirection: 'row',
+      backgroundColor: COLORS.gray300,
+      borderRadius: 5,
     },
   }),
 
@@ -269,4 +374,34 @@ export const styles = {
       fontSize: 28,
     },
   }),
+
+  Headers: {
+    ec2: {
+      // Layout
+      flexDirection: 'column',
+      padding: 16,
+      backgroundColor: COLORS.white,
+      borderRadius: 12,
+
+      // Profundidad y Capas
+      zIndex: 100,
+      ...Platform.select({
+        android: {
+          elevation: 8,
+        },
+        ios: {
+          shadowColor: COLORS.black,
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.15,
+          shadowRadius: 10,
+        },
+        web: {
+          left: '20.5%',
+          boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.1)',
+          position: 'fixed',
+          width: 'calc(60% - 20px)',
+        },
+      }),
+    },
+  } as const,
 }

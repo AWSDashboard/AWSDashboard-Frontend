@@ -71,6 +71,7 @@ module.exports = {
   transpilePackages: [
     'react-native',
     'react-native-web',
+    'react-native-svg',
     'solito',
     'react-native-reanimated',
     'moti',

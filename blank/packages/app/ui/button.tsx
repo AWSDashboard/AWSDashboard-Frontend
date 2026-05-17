@@ -5,8 +5,9 @@ import { styles } from 'app/styles/styles'
 interface ButtonProps {
   children?: React.ReactNode
   onPress: () => void
-  variant?: 'submit' | 'ghost' | 'link' // Nuestras variantes
+  variant?: 'submit' | 'ghost' | 'link' | 'primary' // Nuestras variantes
   style?: StyleProp<ViewStyle> // Para ajustes extra (como márgenes)
+  disable?: boolean
 }
 
 export function Button({
@@ -14,6 +15,7 @@ export function Button({
   onPress,
   variant = 'submit',
   style,
+  disable,
 }: ButtonProps) {
   // 1. Seleccionamos el estilo del contenedor
   const buttonStyle = [
@@ -21,6 +23,7 @@ export function Button({
     variant === 'submit' && styles.button.submit,
     variant === 'ghost' && styles.button.ghost,
     variant === 'link' && styles.button.link,
+    variant === 'primary' && styles.button.primary,
     style, // Estilo extra manual
   ]
 
@@ -35,6 +38,7 @@ export function Button({
   return (
     <TouchableOpacity
       onPress={onPress}
+      disabled={disable}
       style={buttonStyle}
       activeOpacity={0.7} // Efecto visual al pulsar
     >
