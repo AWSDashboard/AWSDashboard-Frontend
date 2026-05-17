@@ -45,6 +45,121 @@ export const COLORS = {
   gray100: '#F2F3F3', // Fondo de la app (AWS Grey)
 } as const
 
+export const selectStyles = StyleSheet.create({
+  container: {
+    position: 'relative',
+    width: '100%',
+    zIndex: 10,
+  },
+  selectBox: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 12,
+    borderRadius: 8,
+    backgroundColor: '#fff',
+    minHeight: 46,
+  },
+  selectText: {
+    fontSize: 15,
+    color: '#232F3E',
+  },
+  placeholderText: {
+    fontSize: 15,
+    color: '#888',
+  },
+  arrow: {
+    fontSize: 12,
+    color: '#666',
+  },
+
+  dropdown: {
+    position: 'absolute',
+    top: '100%',
+    left: 0,
+    right: 0,
+    marginTop: 4,
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.15,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 4,
+      },
+      web: {
+        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+      },
+    }),
+    overflow: 'hidden',
+    zIndex: 999,
+  },
+  option: {
+    padding: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f0f0',
+    backgroundColor: '#fff',
+  },
+
+  optionText: {
+    fontSize: 15,
+    color: '#232F3E',
+  },
+
+  input: {
+    width: '100%',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 12,
+    borderRadius: 8,
+    backgroundColor: '#fff',
+    fontSize: 15,
+    color: '#232F3E', // El gris oscuro de AWS
+    minHeight: 46, // 🟢 Misma altura que el selectBox para que se alineen perfecto
+    // Propiedad exclusiva para Web (Next.js) para evitar el borde azul feo nativo
+    ...Platform.select({
+      web: {
+        outlineStyle: 'none' as any,
+      },
+    }),
+  },
+
+  // 🟢 Estilo por si quieres pintar el borde naranja de AWS cuando el usuario está escribiendo
+  inputFocused: {
+    borderColor: '#FF9900',
+  },
+
+  // 🟢 Estilo para cuando el input esté bloqueado (disabled)
+  inputDisabled: {
+    backgroundColor: '#f5f5f5',
+    borderColor: '#e0e0e0',
+    color: '#a0a0a0',
+  },
+
+  errorText: {
+    color: '#d93939',
+    fontSize: 13,
+    marginTop: 4,
+  },
+
+  errorBox: {
+    borderColor: '#d93939', // 🔴 El mismo rojo de AWS que usamos en el TextInput
+  },
+
+  disabledBox: {
+    backgroundColor: '#f5f5f5', // Fondo gris claro sutil de AWS
+    borderColor: '#e0e0e0', // Borde más claro para que se vea "apagado"
+  },
+})
+
 export const styles = {
   // 1. Estilos del Layout principal
 

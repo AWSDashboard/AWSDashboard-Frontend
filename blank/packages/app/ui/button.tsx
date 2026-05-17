@@ -7,6 +7,7 @@ interface ButtonProps {
   onPress: () => void
   variant?: 'submit' | 'ghost' | 'link' | 'primary' // Nuestras variantes
   style?: StyleProp<ViewStyle> // Para ajustes extra (como márgenes)
+  disable?: boolean
 }
 
 export function Button({
@@ -14,6 +15,7 @@ export function Button({
   onPress,
   variant = 'submit',
   style,
+  disable,
 }: ButtonProps) {
   // 1. Seleccionamos el estilo del contenedor
   const buttonStyle = [
@@ -36,6 +38,7 @@ export function Button({
   return (
     <TouchableOpacity
       onPress={onPress}
+      disabled={disable}
       style={buttonStyle}
       activeOpacity={0.7} // Efecto visual al pulsar
     >

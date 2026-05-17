@@ -40,8 +40,10 @@
     "singleQuote": true
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "d3-scale": "^4.0.2",
     "d3-shape": "^3.2.0",
+    "react-hook-form": "^7.76.0",
     "react-native-pure-chart": "^0.0.24",
     "react-native-svg": "^15.15.5"
   }

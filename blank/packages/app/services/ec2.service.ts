@@ -1,4 +1,5 @@
 import { api } from 'app/api'
+import { CreateEc2FormValues } from 'app/types/createEc2.schema'
 import { EC2Instance, EC2InstancesResponse } from 'app/types/ec2Types'
 
 export class ec2Service {
@@ -126,5 +127,14 @@ export class ec2Service {
     )
     // console.log('respuesta de ec2', data.body)
     return data
+  }
+
+  async createEc2(data: CreateEc2FormValues) {
+    const { subnet, ...payload } = data
+    const response = await api.post(`/ec2/instances`, payload, {
+      params: { regionId: 1 },
+    })
+    // console.log('respuesta de ec2', data.body)
+    return response.data
   }
 }

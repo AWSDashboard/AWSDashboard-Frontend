@@ -7,7 +7,9 @@ import {
 
 import { ec2Service } from 'app/services/ec2.service'
 import { usePendingStore } from 'app/store/useCounterStore'
+import { CreateEc2FormValues } from 'app/types/createEc2.schema'
 import { EC2Instance, EC2InstancesResponse } from 'app/types/ec2Types'
+import { useRouter } from 'solito/navigation'
 
 const service = new ec2Service()
 
@@ -88,6 +90,32 @@ function useEC2NetworkPacketsOutData(id: string) {
   return useQuery({
     queryKey: ['ec2-NPOData', id],
     queryFn: () => service.getEc2NetworkPacketsOutData(id),
+  })
+}
+
+function useCreateEC2() {
+  const queryClient = useQueryClient()
+  const { push } = useRouter()
+  const setPending = usePendingStore((state) => state.setPending)
+  return useMutation({
+    mutationFn: (data: CreateEc2FormValues) => {
+      return service.createEc2(data)
+    },
+    onMutate: () => {
+      setPending(true)
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['ec2-instances'] })
+      setTimeout(() => {
+        queryClient.invalidateQueries({ queryKey: ['ec2-instances'] })
+        setPending(false)
+        push('/ec2')
+      }, 30000)
+    },
+    onError: (error) => {
+      console.log('Error en el stop instances:', error.message)
+      setPending(false)
+    },
   })
 }
 
@@ -211,4 +239,5 @@ export {
   useEC2NetworkPacketsOutData,
   useEC2ReadDiskData,
   useEC2WriteDiskData,
+  useCreateEC2,
 }
