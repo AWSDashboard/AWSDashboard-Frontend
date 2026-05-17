@@ -1,4 +1,9 @@
-import { Text, useWindowDimensions, View } from 'react-native'
+import {
+  ActivityIndicator,
+  Text,
+  useWindowDimensions,
+  View,
+} from 'react-native'
 import { UniversalBlockChart } from '../chart'
 import { COLORS } from 'app/styles/styles'
 import { EC2ChartController } from 'app/hooks/useEc2ChartController'
@@ -52,7 +57,12 @@ export function EC2Charts({ instanceId }: EC2ChartProps) {
           style={{ margin: 5 }}
           onPress={invalidateChartData}
         >
-          <Icon asset={rotate} style={{}} />
+          {chartLoading ? (
+            <ActivityIndicator size="small" color={COLORS.black} />
+          ) : (
+            <Icon asset={rotate} style={{}} />
+          )}
+
           <Text> Actualizar gráficas</Text>
         </Button>
       </View>

@@ -1,5 +1,4 @@
-import { COLORS } from 'app/styles/styles'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { View, Text, LayoutChangeEvent, StyleSheet } from 'react-native'
 import { Svg, Path, Circle, G, Line as SvgLine } from 'react-native-svg'
 

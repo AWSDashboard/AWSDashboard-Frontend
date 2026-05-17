@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import {
-  invalidateAllEC2Data,
   useEC2CPUData,
   useEC2NetworkInData,
   useEC2NetworkOutData,
@@ -9,7 +8,7 @@ import {
   useEC2ReadDiskData,
   useEC2WriteDiskData,
 } from './api/use-ec2'
-import { useQueryClient } from '@tanstack/react-query'
+
 
 export function EC2ChartController(id: string) {
   const [isIn, setIsIn] = useState<boolean>(true)

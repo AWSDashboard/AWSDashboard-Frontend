@@ -28,8 +28,8 @@ export function ec2Screen() {
           alignContent: 'center',
         }}
       >
-        <Text style={[styles.text.h2]}> Instancias </Text>
-        <Button variant="primary" onPress={() => push('ec2/create')}>
+        <Text style={[styles.text.h1]}> Instancias </Text>
+        <Button variant="primary" onPress={() => push('/createEc2')}>
           <Icon asset={plus} />
           <Text> Nueva instancia</Text>
         </Button>
