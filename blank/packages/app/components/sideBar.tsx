@@ -7,12 +7,12 @@ import {
   ImageBackgroundBase,
 } from 'react-native'
 import { AWS_COLORS, COLORS, styles } from 'app/styles/styles'
-import { Button } from './button'
 import { useRouter } from 'solito/navigation'
 import DatabaseIcon from 'app/assets/database.png'
 import homeIcon from 'app/assets/house.png'
 import ec2Icon from 'app/assets/cpu.png'
-import { Icon } from './Icon'
+import { Button } from 'app/ui/button'
+import { Icon } from 'app/ui/Icon'
 
 export function Sidebar() {
   const { push, replace, back } = useRouter()

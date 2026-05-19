@@ -20,6 +20,7 @@ export function NavigationProvider({
               s3: 's3',
               ec2Info: 'ec2Info/:instanceId',
               createEc2: 'createEc2',
+              login: 'login',
             },
           },
         }),

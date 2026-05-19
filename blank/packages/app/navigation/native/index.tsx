@@ -6,6 +6,7 @@ import { s3Screen } from 'app/features/s3/screen'
 import { ec2InfoScreen } from 'app/features/ec2Info/screen'
 import { COLORS } from 'app/styles/styles'
 import { CreateEc2 } from 'app/features/createEc2/screen'
+import { LogIn } from 'app/features/login/screen'
 
 const Stack = createNativeStackNavigator<{
   home: undefined
@@ -13,6 +14,7 @@ const Stack = createNativeStackNavigator<{
   s3: undefined
   ec2Info: { instanceId: string }
   createEc2: undefined
+  login: undefined
 }>()
 
 export function NativeNavigation() {
@@ -51,6 +53,13 @@ export function NativeNavigation() {
         component={CreateEc2}
         options={{
           title: 'createEc2',
+        }}
+      />
+      <Stack.Screen
+        name="login"
+        component={LogIn}
+        options={{
+          title: 'login',
         }}
       />
     </Stack.Navigator>

@@ -161,6 +161,8 @@ export const selectStyles = StyleSheet.create({
 })
 
 export const styles = {
+
+ 
   // 1. Estilos del Layout principal
 
   color: StyleSheet.create({
