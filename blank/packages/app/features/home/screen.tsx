@@ -5,12 +5,14 @@ import { styles } from 'app/styles/styles'
 import { EC2CardContent } from 'app/ui/Card/EC2CardContent'
 import { S3CardContent } from 'app/ui/Card/S3CardContent'
 import { Button } from 'app/ui/button'
-import { useLogOut } from 'app/hooks/api/use-auth'
+import { useRouter } from 'solito/navigation'
+import { useAuthStore } from 'app/store/useAuth'
 
 export function HomeScreen() {
-  const { mutate } = useLogOut()
-  const handleLogOut = () => {
-    mutate()
+  const { push } = useRouter()
+  const clearLocalSession = useAuthStore((state) => state.logout)
+  const handleLogOut = async () => {
+    await clearLocalSession()
   }
   return (
     <ProtectedLayout>

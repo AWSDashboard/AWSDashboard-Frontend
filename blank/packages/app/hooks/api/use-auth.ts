@@ -42,25 +42,6 @@ function useSignUp() {
   })
 }
 
-function useLogOut() {
-  const { push } = useRouter()
-  const clearLocalSession = useAuthStore((state) => state.logout)
-
-  return useMutation({
-    mutationFn: () => service.logOut(),
-    onSuccess: async () => {
-      await clearLocalSession()
-      push('/')
-    },
-    onError: async (error) => {
-      console.error('Error al cerrar sesión en el servidor:', error)
-      //forzamos el borrado por si acaso
-      await clearLocalSession()
-      push('/')
-    },
-  })
-}
-
 function useAwsCredentials() {
   const { push } = useRouter()
 
@@ -76,4 +57,4 @@ function useAwsCredentials() {
   })
 }
 
-export { useSignIn, useSignUp, useAwsCredentials, useLogOut }
+export { useSignIn, useSignUp, useAwsCredentials }

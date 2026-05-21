@@ -15,11 +15,6 @@ export class authService {
     return data
   }
 
-  async logOut(): Promise<any> {
-    const { data } = await api.post('/auth/login')
-    return data
-  }
-
   async awsCredentials(credentials: any): Promise<any> {
     const { data } = await api.post('/aws/credentials', credentials)
     return data
