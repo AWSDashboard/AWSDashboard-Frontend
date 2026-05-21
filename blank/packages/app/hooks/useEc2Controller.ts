@@ -1,13 +1,20 @@
 import { useState } from 'react'
 import { useEC2Instance, useEC2Instances } from './api/use-ec2'
+import { useRouter } from 'solito/navigation'
 
 export function EC2Controller() {
   //storage global
 
   //state
   const [id, setId] = useState<string>()
+  const { push } = useRouter()
 
-  const { data, isLoading, error } = useEC2Instances()
+  const { data, isLoading, error, isError } = useEC2Instances()
+
+  if (isError) {
+    console.error('Error al cargar instancias:', error.message)
+    push('/awscredentials')
+  }
 
   const {
     data: element,

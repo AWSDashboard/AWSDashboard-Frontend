@@ -30,7 +30,7 @@ function useSignUp() {
   const setLoginToken = useAuthStore((state) => state.login)
 
   return useMutation({
-    mutationFn: (data: SignInType) => service.signIn(data),
+    mutationFn: (data: SignInType) => service.signUp(data),
     onSuccess: async (data) => {
       await setLoginToken(data.token)
       replace('/')
@@ -42,4 +42,38 @@ function useSignUp() {
   })
 }
 
-export { useSignIn, useSignUp }
+function useLogOut() {
+  const { push } = useRouter()
+  const clearLocalSession = useAuthStore((state) => state.logout)
+
+  return useMutation({
+    mutationFn: () => service.logOut(),
+    onSuccess: async () => {
+      await clearLocalSession()
+      push('/')
+    },
+    onError: async (error) => {
+      console.error('Error al cerrar sesión en el servidor:', error)
+      //forzamos el borrado por si acaso
+      await clearLocalSession()
+      push('/')
+    },
+  })
+}
+
+function useAwsCredentials() {
+  const { push } = useRouter()
+
+  return useMutation({
+    mutationFn: (data: any) => service.awsCredentials(data),
+    onSuccess: () => {
+      push('/')
+    },
+    onError: (error) => {
+      // Manejo de errores (mostrar un toast, alerta, etc.)
+      console.error('Falló la autenticación:', error)
+    },
+  })
+}
+
+export { useSignIn, useSignUp, useAwsCredentials, useLogOut }

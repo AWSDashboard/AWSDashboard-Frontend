@@ -115,6 +115,7 @@ function useCreateEC2() {
     onError: (error) => {
       console.log('Error en el stop instances:', error.message)
       setPending(false)
+      
     },
   })
 }

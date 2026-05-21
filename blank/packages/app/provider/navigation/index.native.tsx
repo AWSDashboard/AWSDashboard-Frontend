@@ -22,6 +22,7 @@ export function NavigationProvider({
               createEc2: 'createEc2',
               login: 'login',
               signup: 'signup',
+              awscredentials: 'awscredentials',
             },
           },
         }),

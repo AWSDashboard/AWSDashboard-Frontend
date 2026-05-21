@@ -1,4 +1,5 @@
 // packages/app/api/index.ts
+import { useAuthStore } from 'app/store/useAuth'
 import axios from 'axios'
 import { Platform } from 'react-native'
 
@@ -10,9 +11,25 @@ const getBaseUrl = () => {
 }
 
 export const api = axios.create({
-  baseURL: 'http://100.52.166.99:8080/api/v1',
+  baseURL: getBaseUrl(),
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
   },
 })
+api.interceptors.request.use(
+  (config) => {
+    // Leemos el token actual directamente del estado de Zustand
+    const token = useAuthStore.getState().token
+
+    // Si hay un token, lo inyectamos en las cabeceras
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+
+    return config
+  },
+  (error) => {
+    return Promise.reject(error)
+  },
+)

@@ -6,8 +6,6 @@ export const SigInSchema = z.object({
 })
 
 export const SigInResponseSchema = z.object({
-  email: z.string().email().min(1, 'Campo requerido'),
-  password: z.string(),
   token: z.string(),
 })
 
