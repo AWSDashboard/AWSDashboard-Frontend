@@ -10,7 +10,7 @@ const getBaseUrl = () => {
 }
 
 export const api = axios.create({
-  baseURL: getBaseUrl(),
+  baseURL: 'http://100.52.166.99:8080/api/v1',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',

@@ -21,6 +21,7 @@ export function NavigationProvider({
               ec2Info: 'ec2Info/:instanceId',
               createEc2: 'createEc2',
               login: 'login',
+              signup: 'signup',
             },
           },
         }),

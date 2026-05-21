@@ -1,5 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PublicLayout } from 'app/components/publicLayout'
+import { useSignUp } from 'app/hooks/api/use-auth'
+import { COLORS, selectStyles, styles } from 'app/styles/styles'
+import { SignUpSchema, SignUpType } from 'app/types/auth.schema'
+import { Button } from 'app/ui/button'
 import { Card } from 'app/ui/Card/card'
 import { Controller, useForm } from 'react-hook-form'
 import {
@@ -9,30 +13,30 @@ import {
   TextInput,
   View,
 } from 'react-native'
-import { SigInSchema, SignInType } from 'app/types/auth.schema'
-import { COLORS, selectStyles, styles } from 'app/styles/styles'
-import { Button } from 'app/ui/button'
 import { useRouter } from 'solito/navigation'
-import { useSignIn } from 'app/hooks/api/use-auth'
 
-export function LogIn() {
-  const { mutate } = useSignIn()
+export function signUp() {
+  const { mutate } = useSignUp()
   const { push } = useRouter()
   const {
     control,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<SignInType>({
+  } = useForm<SignUpType>({
     defaultValues: {
       email: '',
       password: '',
     },
-    resolver: zodResolver(SigInSchema),
+    resolver: zodResolver(SignUpSchema),
   })
 
-  const onSubmit = (data: SignInType) => {
+  const onSubmit = (data: SignUpType) => {
     console.log('¡Datos validados y listos para enviar!', data)
-    mutate(data)
+    const newData = {
+      email: data.email,
+      password: data.password,
+    }
+    mutate(newData)
   }
   return (
     <PublicLayout>
@@ -87,7 +91,7 @@ export function LogIn() {
                 },
               ]}
             >
-              Inicia sesion para obtener el acceso a AWS Dashboard
+              Crea un usuario para obtener el acceso a AWS Dashboard
             </Text>
           </View>
           <View style={{ zIndex: 40 }}>
@@ -153,7 +157,38 @@ export function LogIn() {
               }}
             />
           </View>
-
+          <View style={{ zIndex: 40 }}>
+            <Controller
+              control={control}
+              name="repeatPassword"
+              render={({ field: { onChange, onBlur, value } }) => {
+                return (
+                  <View>
+                    <Text style={{ marginBottom: 10, marginTop: 10 }}>
+                      Repita contraseña:{' '}
+                      <Text style={{ color: COLORS.danger600 }}>*</Text>
+                    </Text>
+                    <TextInput
+                      style={[
+                        selectStyles.input,
+                        errors.repeatPassword && { borderColor: '#d93939' },
+                      ]}
+                      placeholder="Repita contraseña"
+                      placeholderTextColor="#888"
+                      onBlur={onBlur}
+                      onChangeText={onChange}
+                      value={value}
+                    />
+                    {errors.repeatPassword && (
+                      <Text style={selectStyles.errorText}>
+                        {errors.repeatPassword.message}
+                      </Text>
+                    )}
+                  </View>
+                )
+              }}
+            />
+          </View>
           <View>
             <Button
               variant="primary"
@@ -166,17 +201,17 @@ export function LogIn() {
                 {false ? (
                   <ActivityIndicator size="small" color={COLORS.black} />
                 ) : (
-                  'Iniciar sesión'
+                  'Crear usuario'
                 )}
               </Text>
             </Button>
             <Button
               variant="link"
               style={{ zIndex: 1, marginTop: 50 }}
-              onPress={() => push('/signup')}
+              onPress={() => push('/login')}
             >
               <Text style={{ color: COLORS.link }}>
-                ¿No tiene cuenta? Pulse aquí.
+                ¿Ya tiene cuenta? Pulse aquí.
               </Text>
             </Button>
           </View>
