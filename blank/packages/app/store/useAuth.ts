@@ -45,7 +45,7 @@ interface AuthActions {
 }
 type AuthStore = AuthState & AuthActions
 
-export const useAuthStore = create<AuthStore>((set) => ({
+export const useAuthStore = create<AuthStore>((set, get) => ({
   token: null,
   isLoading: true,
   isAuthenticated: false,
@@ -53,6 +53,12 @@ export const useAuthStore = create<AuthStore>((set) => ({
   initializeAuth: async () => {
     try {
       const savedToken = await universalStorage.getToken()
+      const currentToken = get().token // Leemos lo que hay actualmente en memoria
+      if (!savedToken && currentToken) {
+        set({ isLoading: false })
+        return
+      }
+
       set({
         token: savedToken,
         isAuthenticated: !!savedToken,
