@@ -4,8 +4,10 @@ import { HomeScreen } from 'app/features/home/screen'
 import { ec2Screen } from 'app/features/ec2/screen'
 import { s3Screen } from 'app/features/s3/screen'
 import { ec2InfoScreen } from 'app/features/ec2Info/screen'
-import { COLORS } from 'app/styles/styles'
 import { CreateEc2 } from 'app/features/createEc2/screen'
+import { LogIn } from 'app/features/login/screen'
+import { signUp } from 'app/features/signup/screen'
+import { awsCredentials } from 'app/features/awscredential/screen'
 
 const Stack = createNativeStackNavigator<{
   home: undefined
@@ -13,6 +15,9 @@ const Stack = createNativeStackNavigator<{
   s3: undefined
   ec2Info: { instanceId: string }
   createEc2: undefined
+  login: undefined
+  signup: undefined
+  awscredentials:undefined
 }>()
 
 export function NativeNavigation() {
@@ -51,6 +56,27 @@ export function NativeNavigation() {
         component={CreateEc2}
         options={{
           title: 'createEc2',
+        }}
+      />
+      <Stack.Screen
+        name="login"
+        component={LogIn}
+        options={{
+          title: 'login',
+        }}
+      />
+      <Stack.Screen
+        name="signup"
+        component={signUp}
+        options={{
+          title: 'signup',
+        }}
+      />
+      <Stack.Screen
+        name="awscredentials"
+        component={awsCredentials}
+        options={{
+          title: 'awscredentials',
         }}
       />
     </Stack.Navigator>

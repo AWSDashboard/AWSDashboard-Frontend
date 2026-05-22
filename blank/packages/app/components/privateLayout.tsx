@@ -1,14 +1,21 @@
 // app/components/layout.tsx
+import { useEffect } from 'react'
 import { View, ScrollView, Platform, StyleSheet } from 'react-native'
-import { styles } from 'app/styles/styles'
-import { Sidebar } from './sideBar' // Importamos la barra visual
+import { useAuthStore } from 'app/store/useAuth'
+import { ProtectedRoute } from './ProtectedRoute'
+import { Sidebar } from './sideBar'
 
 interface LayoutProps {
   children: React.ReactNode
 }
 
-export function Layout({ children }: LayoutProps) {
+export function ProtectedLayout({ children }: LayoutProps) {
   const isWeb = Platform.OS === 'web'
+  const initializeAuth = useAuthStore((state) => state.initializeAuth)
+  // Arrancamos la comprobación de sesión en cuanto se carga el Layout
+  useEffect(() => {
+    initializeAuth()
+  }, [initializeAuth])
 
   const styles = {
     layout: StyleSheet.create({
@@ -36,19 +43,18 @@ export function Layout({ children }: LayoutProps) {
   } as const
 
   return (
-    <View style={styles.layout.mainContainer}>
-      {/* 1. En Web, la Sidebar va a la izquierda */}
-      {isWeb && <Sidebar />}
+    <ProtectedRoute>
+      <View style={styles.layout.mainContainer}>
+        {isWeb && <Sidebar />}
 
-      {/* 2. El contenido principal en el medio (con scroll) */}
-      <View style={styles.layout.content}>
-        <ScrollView contentContainerStyle={styles.layout.scrollContainer}>
-          {children}
-        </ScrollView>
+        <View style={styles.layout.content}>
+          <ScrollView contentContainerStyle={styles.layout.scrollContainer}>
+            {children}
+          </ScrollView>
+        </View>
+
+        {!isWeb && <Sidebar />}
       </View>
-
-      {/* 3. En Móvil, la Sidebar va abajo del todo */}
-      {!isWeb && <Sidebar />}
-    </View>
+    </ProtectedRoute>
   )
 }

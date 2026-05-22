@@ -4,7 +4,7 @@ import { EC2Instance } from 'app/types/ec2Types'
 import { Button } from 'app/ui/button'
 import { Card } from 'app/ui/Card/card'
 import { Icon } from 'app/ui/Icon'
-import { Layout } from 'app/ui/layout'
+import { ProtectedLayout } from 'app/components/privateLayout'
 import { Text, View } from 'react-native'
 import plus from '../../assets/plus.png'
 import { useRouter } from 'solito/navigation'
@@ -20,7 +20,7 @@ export function ec2Screen() {
     return COLORS.primary300
   }
   return (
-    <Layout>
+    <ProtectedLayout>
       <View
         style={{
           flexDirection: 'row',
@@ -139,6 +139,6 @@ export function ec2Screen() {
           </Card>
         )
       })}
-    </Layout>
+    </ProtectedLayout>
   )
 }

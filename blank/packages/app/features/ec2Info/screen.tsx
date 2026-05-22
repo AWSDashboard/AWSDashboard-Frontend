@@ -4,7 +4,7 @@ import { EC2Charts } from 'app/ui/Card/EC2CardCharts'
 import { EC2Details } from 'app/ui/Card/EC2DetailsCar'
 import { EC2DetailsHeader } from 'app/ui/Card/EC2DetailsHeader'
 
-import { Layout } from 'app/ui/layout'
+import { ProtectedLayout } from 'app/components/privateLayout'
 import { useEffect } from 'react'
 import { Platform, Text } from 'react-native'
 import { useParams } from 'solito/navigation'
@@ -22,18 +22,18 @@ export function ec2InfoScreen() {
 
   if (elemntLoading)
     return (
-      <Layout>
+      <ProtectedLayout>
         <Text>Cargando datos de la instancia....</Text>
-      </Layout>
+      </ProtectedLayout>
     )
   if (elemntError)
     return (
-      <Layout>
+      <ProtectedLayout>
         <Text>Error del servicor: {elemntError.message}</Text>
-      </Layout>
+      </ProtectedLayout>
     )
   return (
-    <Layout>
+    <ProtectedLayout>
       <EC2DetailsHeader instanceId={instanceId!} element={element!} />
       <Card
         style={{
@@ -47,6 +47,6 @@ export function ec2InfoScreen() {
         <EC2Details element={element!} formatUptime={formatUptime} />
         <EC2Charts instanceId={instanceId} />
       </Card>
-    </Layout>
+    </ProtectedLayout>
   )
 }

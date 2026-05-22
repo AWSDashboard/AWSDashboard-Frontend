@@ -15,6 +15,8 @@ export const COLORS = {
   primary600: '#E08600',
   primary900: '#8C5400',
 
+  link: '#0000EE',
+
   secondary: '#232F3E', // AWS Deep Squid Ink
   accent: '#0073BB', // AWS Blue
 

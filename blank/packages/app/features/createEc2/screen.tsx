@@ -1,4 +1,4 @@
-import { Layout } from 'app/ui/layout'
+import { ProtectedLayout } from 'app/components/privateLayout'
 import {
   ActivityIndicator,
   Platform,
@@ -42,7 +42,7 @@ export function CreateEc2() {
   }
 
   return (
-    <Layout>
+    <ProtectedLayout>
       <Card
         style={{
           flexDirection: 'column',
@@ -72,7 +72,8 @@ export function CreateEc2() {
               return (
                 <View>
                   <Text style={{ marginBottom: 10, marginTop: 10 }}>
-                    Nombre de la instancia:
+                    Nombre de la instancia
+                    <Text style={{ color: COLORS.danger600 }}>*</Text>
                   </Text>
                   <TextInput
                     style={[
@@ -103,7 +104,8 @@ export function CreateEc2() {
               return (
                 <View>
                   <Text style={{ marginBottom: 10, marginTop: 10 }}>
-                    Seleccione una imagen:
+                    Seleccione una imagen
+                    <Text style={{ color: COLORS.danger600 }}>*</Text>
                   </Text>
                   <Select
                     options={[
@@ -139,7 +141,8 @@ export function CreateEc2() {
               return (
                 <View>
                   <Text style={{ marginBottom: 10, marginTop: 10 }}>
-                    Seleccione una imagen:
+                    Seleccione una imagen
+                    <Text style={{ color: COLORS.danger600 }}>*</Text>
                   </Text>
                   <Select
                     options={[
@@ -183,7 +186,7 @@ export function CreateEc2() {
               return (
                 <View>
                   <Text style={{ marginBottom: 10, marginTop: 10 }}>
-                    Par de claves:
+                    Par de claves
                   </Text>
                   <Select
                     options={[]}
@@ -198,7 +201,7 @@ export function CreateEc2() {
         </View>
         <View style={{ zIndex: 5 }}>
           <View>
-            <Text style={{ marginBottom: 10, marginTop: 10 }}>Subnet:</Text>
+            <Text style={{ marginBottom: 10, marginTop: 10 }}>Subnet</Text>
             <Select
               options={[]}
               onChange={() => {}}
@@ -224,6 +227,6 @@ export function CreateEc2() {
           </Button>
         </View>
       </Card>
-    </Layout>
+    </ProtectedLayout>
   )
 }
