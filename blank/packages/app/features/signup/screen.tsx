@@ -5,6 +5,7 @@ import { COLORS, selectStyles, styles } from 'app/styles/styles'
 import { SignUpSchema, SignUpType } from 'app/types/auth.schema'
 import { Button } from 'app/ui/button'
 import { Card } from 'app/ui/Card/card'
+import { Icon } from 'app/ui/Icon'
 import { Controller, useForm } from 'react-hook-form'
 import {
   ActivityIndicator,
@@ -13,10 +14,17 @@ import {
   TextInput,
   View,
 } from 'react-native'
+import eye from '../../assets/eye.png'
+import eyeOf from '../../assets/eye-off.png'
 import { useRouter } from 'solito/navigation'
+import { useState } from 'react'
 
 export function signUp() {
-  const { mutate } = useSignUp()
+  const [visibleFields, setVisibleFields] = useState<Record<string, boolean>>({
+    password: false,
+    repeatPassword: false,
+  })
+  const { mutate, error } = useSignUp()
   const { push } = useRouter()
   const {
     control,
@@ -26,9 +34,21 @@ export function signUp() {
     defaultValues: {
       email: '',
       password: '',
+      repeatPassword: '',
     },
     resolver: zodResolver(SignUpSchema),
   })
+
+  const axiosError = error as any
+  const backendMessage =
+    axiosError?.response?.data?.message || 'Ocurrió un error inesperado'
+
+  const toggleVisibility = (field: 'password' | 'repeatPassword') => {
+    setVisibleFields((prevState) => ({
+      ...prevState,
+      [field]: !prevState[field],
+    }))
+  }
 
   const onSubmit = (data: SignUpType) => {
     console.log('¡Datos validados y listos para enviar!', data)
@@ -136,17 +156,53 @@ export function signUp() {
                       Contraseña:{' '}
                       <Text style={{ color: COLORS.danger600 }}>*</Text>
                     </Text>
-                    <TextInput
+                    <View
                       style={[
-                        selectStyles.input,
+                        {
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                        },
                         errors.password && { borderColor: '#d93939' },
                       ]}
-                      placeholder="Contraseña"
-                      placeholderTextColor="#888"
-                      onBlur={onBlur}
-                      onChangeText={onChange}
-                      value={value}
-                    />
+                    >
+                      <TextInput
+                        style={[selectStyles.input, { flex: 1 }]}
+                        secureTextEntry={!visibleFields['password']}
+                        placeholder="Contraseña"
+                        placeholderTextColor="#888"
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        onBlur={onBlur}
+                        onChangeText={onChange}
+                        value={value}
+                      />
+
+                      <Button
+                        variant="ghost"
+                        onPress={() => {
+                          toggleVisibility('password')
+                        }}
+                        style={{
+                          backgroundColor: '',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}
+                      >
+                        {visibleFields['password'] ? (
+                          <Icon
+                            asset={eye}
+                            style={{ height: 20, weight: 20 }}
+                          />
+                        ) : (
+                          <Icon
+                            asset={eyeOf}
+                            style={{ height: 20, weight: 20 }}
+                          />
+                        )}
+                      </Button>
+                    </View>
+
                     {errors.password && (
                       <Text style={selectStyles.errorText}>
                         {errors.password.message}
@@ -165,20 +221,56 @@ export function signUp() {
                 return (
                   <View>
                     <Text style={{ marginBottom: 10, marginTop: 10 }}>
-                      Repita contraseña:{' '}
+                      Contraseña:{' '}
                       <Text style={{ color: COLORS.danger600 }}>*</Text>
                     </Text>
-                    <TextInput
+                    <View
                       style={[
-                        selectStyles.input,
+                        {
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                        },
                         errors.repeatPassword && { borderColor: '#d93939' },
                       ]}
-                      placeholder="Repita contraseña"
-                      placeholderTextColor="#888"
-                      onBlur={onBlur}
-                      onChangeText={onChange}
-                      value={value}
-                    />
+                    >
+                      <TextInput
+                        style={[selectStyles.input, { flex: 1 }]}
+                        secureTextEntry={!visibleFields['repeatPassword']}
+                        placeholder="Contraseña"
+                        placeholderTextColor="#888"
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        onBlur={onBlur}
+                        onChangeText={onChange}
+                        value={value}
+                      />
+
+                      <Button
+                        variant="ghost"
+                        onPress={() => {
+                          toggleVisibility('repeatPassword')
+                        }}
+                        style={{
+                          backgroundColor: '',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}
+                      >
+                        {visibleFields['repeatPassword'] ? (
+                          <Icon
+                            asset={eye}
+                            style={{ height: 20, weight: 20 }}
+                          />
+                        ) : (
+                          <Icon
+                            asset={eyeOf}
+                            style={{ height: 20, weight: 20 }}
+                          />
+                        )}
+                      </Button>
+                    </View>
+
                     {errors.repeatPassword && (
                       <Text style={selectStyles.errorText}>
                         {errors.repeatPassword.message}
@@ -189,10 +281,23 @@ export function signUp() {
               }}
             />
           </View>
-          <View>
+          <View
+            style={{
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              zIndex: 1,
+              marginTop: 20,
+            }}
+          >
+            {error && (
+              <Text style={[selectStyles.errorText, { margin: 20 }]}>
+                {backendMessage}
+              </Text>
+            )}
             <Button
               variant="primary"
-              style={{ zIndex: 1, marginTop: 50 }}
+              style={{}}
               onPress={handleSubmit(onSubmit)}
               //   disable={pending}
             >
@@ -201,7 +306,7 @@ export function signUp() {
                 {false ? (
                   <ActivityIndicator size="small" color={COLORS.black} />
                 ) : (
-                  'Crear usuario'
+                  'Crear cuenta'
                 )}
               </Text>
             </Button>

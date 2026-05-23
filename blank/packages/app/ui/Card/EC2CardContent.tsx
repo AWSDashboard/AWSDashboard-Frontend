@@ -54,7 +54,7 @@ export function EC2CardContent({ children }: CardContentProps) {
           ]}
         >
           <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>
-            instancias
+            Instancias
           </Text>
           <Text style={[styles.text.fontMd, { marginRight: 15 }]}>
             {countInstances}
@@ -87,23 +87,10 @@ export function EC2CardContent({ children }: CardContentProps) {
             },
           ]}
         >
-          <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>apagadas</Text>
+          <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>Apagadas</Text>
           <Text style={[styles.text.fontMd, { marginRight: 15 }]}>
             {countStoppedEc2}
           </Text>
-        </View>
-        <View
-          style={[
-            {
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              backgroundColor: COLORS.gray300,
-              borderRadius: 5,
-            },
-          ]}
-        >
-          <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>consumo</Text>
-          <Text style={[styles.text.fontMd, { marginRight: 15 }]}>????</Text>
         </View>
       </View>
     </>

@@ -23,6 +23,7 @@ export function NavigationProvider({
               login: 'login',
               signup: 'signup',
               awscredentials: 'awscredentials',
+              s3details: 's3details/:bucketName',
             },
           },
         }),

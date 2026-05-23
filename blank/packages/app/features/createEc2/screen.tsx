@@ -104,7 +104,7 @@ export function CreateEc2() {
               return (
                 <View>
                   <Text style={{ marginBottom: 10, marginTop: 10 }}>
-                    Seleccione una imagen
+                    Seleccione la CPU
                     <Text style={{ color: COLORS.danger600 }}>*</Text>
                   </Text>
                   <Select

@@ -77,9 +77,7 @@ export function ec2Screen() {
                   },
                 ]}
               >
-                <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>
-                  Id:
-                </Text>
+                <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>Id</Text>
                 <Text style={[styles.text.fontMd, { marginRight: 15 }]}>
                   {element.instanceId}
                 </Text>
@@ -95,7 +93,7 @@ export function ec2Screen() {
                 ]}
               >
                 <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>
-                  Plataforma base:
+                  Plataforma base
                 </Text>
                 <Text style={[styles.text.fontMd, { marginRight: 15 }]}>
                   {element.osPlatform}
@@ -112,7 +110,7 @@ export function ec2Screen() {
                 ]}
               >
                 <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>
-                  Ip publica:
+                  Ip pública
                 </Text>
                 <Text style={[styles.text.fontMd, { marginRight: 15 }]}>
                   {element.publicIp ? element.publicIp : '-'}
@@ -129,7 +127,7 @@ export function ec2Screen() {
                 ]}
               >
                 <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>
-                  Ip privada:
+                  Ip privada
                 </Text>
                 <Text style={[styles.text.fontMd, { marginRight: 15 }]}>
                   {element.publicIp ? element.privateIp : '-'}

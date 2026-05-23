@@ -12,7 +12,7 @@ export function EC2Controller() {
   const { data, isLoading, error, isError } = useEC2Instances()
 
   if (isError) {
-    console.error('Error al cargar instancias:', error.message)
+    console.log('Error al cargar instancias:', error.message)
     push('/awscredentials')
   }
 
