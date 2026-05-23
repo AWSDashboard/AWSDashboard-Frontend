@@ -19,7 +19,7 @@ export function EC2Details({ element, formatUptime }: EC2DetailsProps) {
     >
       <View style={[styles.card.muttedContent, { marginTop: 10 }]}>
         <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>
-          Id de la instancia:
+          Id de la instancia
         </Text>
         <Text style={[styles.text.fontMd, { marginRight: 15 }]}>
           {element!.instanceId}
@@ -27,31 +27,27 @@ export function EC2Details({ element, formatUptime }: EC2DetailsProps) {
       </View>
       <View style={[styles.card.muttedContent]}>
         <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>
-          Plataforma base:
+          Plataforma base
         </Text>
         <Text style={[styles.text.fontMd, { marginRight: 15 }]}>
           {element!.osPlatform}
         </Text>
       </View>
       <View style={[styles.card.muttedContent]}>
-        <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>
-          Ip publica:
-        </Text>
+        <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>Ip pública</Text>
         <Text style={[styles.text.fontMd, { marginRight: 15 }]}>
           {element!.publicIp ? element!.publicIp : '-'}
         </Text>
       </View>
       <View style={[styles.card.muttedContent]}>
-        <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>
-          Ip privada:
-        </Text>
+        <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>Ip privada</Text>
         <Text style={[styles.text.fontMd, { marginRight: 15 }]}>
           {element!.publicIp ? element!.privateIp : '-'}
         </Text>
       </View>
       <View style={[styles.card.muttedContent]}>
         <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>
-          Tipo de disco principipal:
+          Tipo de disco principipal
         </Text>
         <Text style={[styles.text.fontMd, { marginRight: 15 }]}>
           {element!.rootDeviceType ? element!.rootDeviceType : '-'}
@@ -76,7 +72,7 @@ export function EC2Details({ element, formatUptime }: EC2DetailsProps) {
       </View>
       <View style={[styles.card.muttedContent]}>
         <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>
-          Tiempo de ejecución:
+          Tiempo de ejecución
         </Text>
         <Text style={[styles.text.fontMd, { marginRight: 15 }]}>
           {element!.launchTime ? formatUptime(element!.launchTime) : '-'}
@@ -90,7 +86,7 @@ export function EC2Details({ element, formatUptime }: EC2DetailsProps) {
       </View>
       <View style={[styles.card.muttedContent]}>
         <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>
-          Arquitectura:
+          Arquitectura
         </Text>
         <Text style={[styles.text.fontMd, { marginRight: 15 }]}>
           {element!.architecture ? element!.architecture : '-'}
@@ -101,7 +97,6 @@ export function EC2Details({ element, formatUptime }: EC2DetailsProps) {
           {element!.securityGroups.length > 1
             ? 'Grupos de seguridad'
             : 'Grupo de seguridad'}
-          :
         </Text>
         <View style={{ flexDirection: 'column' }}>
           {element!.securityGroups.map((element, index) => {
@@ -117,7 +112,7 @@ export function EC2Details({ element, formatUptime }: EC2DetailsProps) {
         </View>
       </View>
       <View style={[styles.card.muttedContent]}>
-        <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>VPC:</Text>
+        <Text style={[styles.text.fontMd, { marginLeft: 15 }]}>VPC</Text>
         <Text style={[styles.text.fontMd, { marginRight: 15 }]}>
           {element!.vpcId ? element!.vpcId : '-'}
         </Text>

@@ -1,4 +1,4 @@
 'use client'
-import { s3Screen } from 'app/features/s3/screen'
+import { S3Screen } from 'app/features/s3/screen'
 
-export default s3Screen
+export default S3Screen

@@ -65,7 +65,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         isLoading: false,
       })
     } catch (error) {
-      console.error('Error inicializando la sesión:', error)
+      console.log('Error inicializando la sesión:', error)
       set({ token: null, isAuthenticated: false, isLoading: false })
     }
   },
@@ -81,7 +81,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         isLoading: false,
       })
     } catch (error) {
-      console.error('Error al guardar el token:', error)
+      console.log('Error al guardar el token:', error)
       set({ isLoading: false })
     }
   },
@@ -96,7 +96,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         isLoading: false,
       })
     } catch (error) {
-      console.error('Error al cerrar sesión:', error)
+      console.log('Error al cerrar sesión:', error)
       set({ isLoading: false })
     }
   },

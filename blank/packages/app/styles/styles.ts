@@ -47,6 +47,40 @@ export const COLORS = {
   gray100: '#F2F3F3', // Fondo de la app (AWS Grey)
 } as const
 
+export const responsiveStyles = StyleSheet.create({
+  headerContainer: {
+    marginBottom: 20,
+    // Usamos Platform.select para separar el comportamiento por plataforma
+    ...Platform.select({
+      web: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        gap: 20,
+      },
+      default: {
+        // Aplica a iOS y Android automáticamente
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'stretch', // El botón se expande a lo ancho en móvil, que es el patrón común
+        gap: 12,
+      },
+    }),
+  },
+  titleText: {
+    // Si estás en web, le damos flex: 1 para que el texto respete al botón.
+    // En móvil (default), al ser un diseño en columna, no necesita flex: 1.
+    ...Platform.select({
+      web: {
+        flex: 1,
+      },
+      default: {
+        flex: 0,
+      },
+    }),
+  },
+})
+
 export const selectStyles = StyleSheet.create({
   container: {
     position: 'relative',

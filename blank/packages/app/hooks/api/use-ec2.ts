@@ -39,8 +39,8 @@ function useEC2Instances() {
 
 function useEC2Instance(id: string) {
   return useQuery<EC2Instance>({
-    queryKey: ['ec2-instances', id],
-    queryFn: () => service.getEc2(id),
+    queryKey: ['ec2-instances', id], //key para ser llamado por la mutacion y actualizar el cache
+    queryFn: () => service.getEc2(id), //funcion de llamada del service
   })
 }
 
@@ -94,28 +94,28 @@ function useEC2NetworkPacketsOutData(id: string) {
 }
 
 function useCreateEC2() {
+  //inicialización de recursos
   const queryClient = useQueryClient()
   const { push } = useRouter()
   const setPending = usePendingStore((state) => state.setPending)
   return useMutation({
-    mutationFn: (data: CreateEc2FormValues) => {
+    mutationFn: (data: CreateEc2FormValues) => {//funcion del service
       return service.createEc2(data)
     },
-    onMutate: () => {
-      setPending(true)
+    onMutate: () => { //acciones a realizar nada más comenzar la mutación
+      setPending(true)//estado global para el spiner de carga
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['ec2-instances'] })
+    onSuccess: () => {//acciones a realizar en caso satisfactorio
+      queryClient.invalidateQueries({ queryKey: ['ec2-instances'] })//actualizar cache de la key
       setTimeout(() => {
-        queryClient.invalidateQueries({ queryKey: ['ec2-instances'] })
+        queryClient.invalidateQueries({ queryKey: ['ec2-instances'] })//actualizar tras pasar 30 segundos
         setPending(false)
-        push('/ec2')
+        push('/ec2')//cambio de vista
       }, 30000)
     },
-    onError: (error) => {
+    onError: (error) => { //gestion de errores de la mutacion
       console.log('Error en el stop instances:', error.message)
       setPending(false)
-      
     },
   })
 }
@@ -141,7 +141,7 @@ function useResetInstance(id: string) {
       }, 30000)
     },
     onError: (error) => {
-      console.log('Error en el stop instances:', error.message)
+      // console.log('Error en el stop instances:', error.message)
     },
   })
 }
@@ -168,7 +168,7 @@ function useStopInstance(id: string) {
       }, 30000)
     },
     onError: (error) => {
-      console.log('Error en el stop instances:', error.message)
+      // console.log('Error en el stop instances:', error.message)
     },
   })
 }
@@ -195,7 +195,7 @@ function useRunInstance(id: string) {
       }, 30000)
     },
     onError: (error) => {
-      console.log('Error en el stop instances:', error.message)
+      // console.log('Error en el stop instances:', error.message)
     },
   })
 }
@@ -222,7 +222,7 @@ function useTerminateInstance(id: string) {
       }, 30000)
     },
     onError: (error) => {
-      console.log('Error en el stop instances:', error.message)
+      // console.log('Error en el stop instances:', error.message)
     },
   })
 }

@@ -1,7 +1,10 @@
 import { z } from 'zod'
 
 export const SigInSchema = z.object({
-  email: z.string().email().min(1, 'Campo requerido'),
+  email: z
+    .string()
+    .email('El campo debe ser un email válido')
+    .min(1, 'Campo requerido'),
   password: z.string(),
 })
 

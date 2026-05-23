@@ -20,7 +20,7 @@ function useSignIn() {
     },
     onError: (error) => {
       // Manejo de errores (mostrar un toast, alerta, etc.)
-      console.error('Falló la autenticación:', error)
+      console.log('Falló la autenticación:', error)
     },
   })
 }
@@ -37,7 +37,7 @@ function useSignUp() {
     },
     onError: (error) => {
       // Manejo de errores (mostrar un toast, alerta, etc.)
-      console.error('Falló la autenticación:', error)
+      console.log('Falló la autenticación:', error)
     },
   })
 }
@@ -52,7 +52,7 @@ function useAwsCredentials() {
     },
     onError: (error) => {
       // Manejo de errores (mostrar un toast, alerta, etc.)
-      console.error('Falló la autenticación:', error)
+      console.log('Falló la autenticación:', error)
     },
   })
 }

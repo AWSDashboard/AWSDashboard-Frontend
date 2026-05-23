@@ -3,6 +3,8 @@ import { useAuthStore } from 'app/store/useAuth'
 import axios from 'axios'
 import { Platform } from 'react-native'
 
+//como tenemos multiplataforma. Para el desarrollo en native se debe conectar
+//en lugar de a localhost a la ip del ordenador que aloja el servidor
 const getBaseUrl = () => {
   if (Platform.OS === 'web') {
     return 'http://localhost:8080/api/v1'
@@ -12,21 +14,19 @@ const getBaseUrl = () => {
 
 export const api = axios.create({
   baseURL: getBaseUrl(),
-  timeout: 10000,
+  timeout: 10000, //tiempo límite de la llamada
+  //headers de las llamadas
   headers: {
     'Content-Type': 'application/json',
   },
 })
+//interceptor que inyecta el TokenJWT en el header con la palabra clave Bearer
 api.interceptors.request.use(
   (config) => {
-    // Leemos el token actual directamente del estado de Zustand
     const token = useAuthStore.getState().token
-
-    // Si hay un token, lo inyectamos en las cabeceras
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
-
     return config
   },
   (error) => {

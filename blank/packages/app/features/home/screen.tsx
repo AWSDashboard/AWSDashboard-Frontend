@@ -1,7 +1,7 @@
 import { Text, View, StyleSheet, Platform } from 'react-native'
 import { ProtectedLayout } from 'app/components/privateLayout'
 import { Card } from 'app/ui/Card/card'
-import { styles } from 'app/styles/styles'
+import { responsiveStyles, styles } from 'app/styles/styles'
 import { EC2CardContent } from 'app/ui/Card/EC2CardContent'
 import { S3CardContent } from 'app/ui/Card/S3CardContent'
 import { Button } from 'app/ui/button'
@@ -16,13 +16,8 @@ export function HomeScreen() {
   }
   return (
     <ProtectedLayout>
-      <View
-        style={{
-          justifyContent: 'space-between',
-          flexDirection: 'row',
-        }}
-      >
-        <Text style={styles.text.h1}>
+      <View style={responsiveStyles.headerContainer}>
+        <Text style={[styles.text.h1, responsiveStyles.titleText]}>
           Bienvenido a la consola multiplataforma de AWS
         </Text>
 
