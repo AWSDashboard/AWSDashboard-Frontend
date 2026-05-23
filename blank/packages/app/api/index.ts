@@ -13,7 +13,8 @@ const getBaseUrl = () => {
 }
 
 export const api = axios.create({
-  baseURL: getBaseUrl(),
+  // baseURL: getBaseUrl(),
+  baseURL: 'http://44.198.158.92:8080/api/v1',
   timeout: 10000, //tiempo límite de la llamada
   //headers de las llamadas
   headers: {

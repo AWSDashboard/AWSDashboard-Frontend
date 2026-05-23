@@ -1,15 +1,12 @@
 {
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
     "paths": {
       "app/*": ["./packages/app/*"]
     },
-    "types": [
-      "node",
-      "react-native",
-      "expo-linking"
-    ],
+    "types": ["node", "react-native", "expo-linking"],
     "baseUrl": ".",
     "jsx": "react-jsx"
   }

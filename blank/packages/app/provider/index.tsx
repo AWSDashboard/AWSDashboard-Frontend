@@ -1,7 +1,6 @@
 // packages/app/provider/index.tsx
 'use client'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { useState } from 'react'
 import { NavigationProvider } from './navigation' // Tu navegación actual
 
 // 1. Creamos el cliente
@@ -12,7 +11,7 @@ export function Provider({ children }: { children: React.ReactNode }) {
     // 2. Envolvemos todo
     <QueryClientProvider client={queryClient}>
       <NavigationProvider>
-        {children}
+        <>{children}</>
       </NavigationProvider>
     </QueryClientProvider>
   )
