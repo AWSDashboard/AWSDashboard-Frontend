@@ -14,7 +14,7 @@ const getBaseUrl = () => {
 
 export const api = axios.create({
   // baseURL: getBaseUrl(),
-  baseURL: 'http://awsdashboard-backend.duckdns.org/api/v1',
+  baseURL: 'https://awsdashboard-backend.duckdns.org/api/v1',
   timeout: 10000, //tiempo límite de la llamada
   //headers de las llamadas
   headers: {
