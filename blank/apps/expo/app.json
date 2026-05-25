@@ -1,16 +1,27 @@
 {
   "expo": {
-    "name": "solito-blank",
-    "slug": "solito-blank",
+    "name": "AWS Dashboard",
+    "slug": "aws-dashboard",
     "version": "1.0.0",
     "scheme": "solito-blank",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "ios": {
       "bundleIdentifier": "com.solito.blank"
     },
     "newArchEnabled": true,
     "experiments": {
       "reactCanary": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5dc5c6ac-5090-4be8-a705-be9b58d0a63e"
+      }
+    },
+    "android": {
+      "package": "com.solito.blank"
     }
   }
 }
