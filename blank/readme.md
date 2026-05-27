@@ -61,6 +61,10 @@ Trabaja con sus propias rutas.
 Solito.dev: (https://solito.dev/)
 GitHun de Fernando Rojo:
 
+## UML
+
+![Diagrama de Arquitectura MVC](./packages/app/assets/uml.jpeg)
+
 ---
 
 ## Requisitos Previos

@@ -1,0 +1,34 @@
+@startuml
+skinparam defaultTextAlignment center
+
+folder "AWSDASHBOARD-FRONTEND (Monorepo)" {
+    
+    package "apps (Entornos)" {
+        node "expo\n[React Native]" as expo
+        node "next\n[Next.js]" as next
+    }
+
+    package "packages/app (Core Cross-Platform)" {
+        folder "features" {
+            [ec2]
+            [s3]
+            [home]
+        }
+        folder "ui" {
+            [Card]
+        }
+        folder "services & hooks" {
+            [api / axios]
+            [useEc2]
+        }
+    }
+}
+
+' Relaciones de dependencia
+expo ..> [features] : Consume
+next ..> [features] : Consume
+[features] ..> [ui] : Renderiza
+[features] ..> [useEc2] : Gestiona estado
+[useEc2] ..> [api / axios] : Peticiones HTTP
+
+@enduml
