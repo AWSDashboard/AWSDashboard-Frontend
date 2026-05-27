@@ -2,8 +2,6 @@
 
 Bienvenido al repositorio del Frontend de **AWSDashboard**. Este proyecto está construido actualmente con **React** (utilizando Vite) y **Node.js**, con una arquitectura pensada para escalar.
 
-> **Nota sobre la visión del proyecto:** Aunque actualmente el proyecto usa Vite, la estructura está diseñada para facilitar una futura migración a **Next.js** para web y **React Native** para móvil, compartiendo lógica y componentes.
-
 ---
 
 ## Índice
